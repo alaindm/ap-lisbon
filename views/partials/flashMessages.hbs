@@ -1,0 +1,23 @@
+{{# each messages.success}}
+<div class="ui message positive" role="alert">
+    {{this}} 
+</div>
+{{/each}}
+
+{{# each messages.info}}
+<div class="ui message info" role="alert">
+    {{this}} 
+</div>
+{{/each}}
+
+{{# each messages.warning}}
+<div class="ui message warning" role="alert">
+    {{this}} 
+</div>
+{{/each}}
+
+{{# each messages.error}}
+<div class="ui message negative" role="alert">
+    {{this}} 
+</div>
+{{/each}}

@@ -1,0 +1,38 @@
+#content {
+  padding-top: 120px;
+  padding-bottom: 70px;
+  min-height: 100vh;  
+}
+
+#footer {
+    position: relative;
+    width: 100%;
+    margin-top: -70px;
+    height: 70px;
+    clear: both;
+}
+
+/* Mobile / Tablet / Old Monitor */
+@media only screen and (max-width: 1019px)  {
+    .mobile.hidden,
+    .monitor.only {
+        display: none !important;
+    }
+}
+
+/* Modern Monitor */
+@media only screen and (min-width: 1020px) {
+    .mobile.only,
+    .monitor.hidden {
+        display: none !important;
+    }
+}
+
+#broker-menu-button {
+    margin: 12px;
+}
+
+.ui .form {
+    max-width: 600px;
+    margin: auto;
+}

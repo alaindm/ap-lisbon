@@ -1,0 +1,165 @@
+<style type="text/css">
+    .ui .form {
+      max-width: 600px;
+      margin: auto;
+    }
+</style>
+
+<div class=" ui main container">
+
+  <form class='ui form' action="/u" method="post">
+
+    <h2 class="ui header">Preencha o formulário abaixo para se cadastrar</h2>
+
+    <div class="ui raised compact segment">
+      <h5 class="ui red header">* <span class="ui black tiny header">Campos de preenchimento obrigatório</span></h5>
+    </div>
+
+    <div class="field required">
+      <label>E-mail</label>
+      <input type="text" name="email" placeholder="" value={{email}}>
+    </div>
+
+    <div class="field required">
+      <label>Senha</label>
+      <input type="password" name="password" placeholder="" value={{password}}>
+    </div>
+
+    <div class="field required">
+      <label>Repita a senha</label>
+      <input type="password" name="password_confirmation" placeholder="">
+    </div>
+
+    <div class="field required">
+      <label>Nome Completo</label>
+      <input type="text" name="full_name" placeholder="Nome Completo">
+    </div>
+
+    <div class="field required">
+      <label>C.P.F.</label>
+      <input type="number" name="cpf" placeholder="">
+    </div>
+
+    <div class="field">
+      <label>Apelido de trabalho (Se tiver)</label>
+      <input type="text" name="nickname" placeholder="">
+    </div>
+
+    <div class="field">
+      <label>Link da página do seu perfil no Facebook</label>
+      <input type="url" name="facebook_url" placeholder="Cole o link aqui...">
+    </div>
+
+    <div class="field required">
+      <label>Telefone para contato (com DDD)</label>
+      <input type="number" name="phone_number" placeholder="(11) 91234-5678">
+    </div>
+
+    <div class="field required">
+      <label>Área de trabalho / Profissão</label>
+      <input type="text" name="work_field" placeholder="Corretor, Engenheiro....">
+    </div>
+
+    <div class="field">
+      <label>CRECI</label>
+      <input type="number" name="creci" placeholder="Número do seu CRECI">
+    </div>
+
+    <div class="field">
+      <label>CREA</label>
+      <input type="text" name="crea" placeholder="Número do seu CREA">
+    </div>
+
+    <div class="field required">
+      <label>Endereço completo (Rua, número e complemento)</label>
+      <input type="text" name="street" placeholder="Avenida Brasil, 100 Ap.1001">
+    </div>
+
+    <div class="field required">
+      <label>Cidade</label>
+      <input type="text" name="city" placeholder="Cidade">
+    </div>
+
+    <div class="field required">
+      <label>Estado</label>
+      <input type="text" name="state" placeholder="Sigla do Estado">
+    </div>
+
+    <div class="field required">
+      <label>País</label>
+      <input type="text" name="country" placeholder="Brasil">
+    </div>
+
+    <div class="field">
+      <label>Banco</label>
+      <input type="text" name="bank" placeholder="Nome ou número do Banco">
+    </div>
+
+    <div class="field">
+      <label>Agência</label>
+      <input type="text" name="branch" placeholder="Número de agência com dígito">
+    </div>
+
+    <div class="field">
+      <label>Conta Corrente</label>
+      <input type="text" name="account_number" placeholder="Conta Corrent com dígito">
+    </div>
+
+    <div class="field">
+      <label>IBAN (Número internacional de Conta Bancária)</label>
+      <input type="number" name="iban" placeholder="">
+    </div>
+
+    <div class="field required">
+      <div class="ui checkbox">
+        <input type="checkbox" name="terms">
+        <label>Concordo com os <a href='/tos' target="_blank">termos de uso</a> e <a href='/pp' target="_blank">política de privacidade</a> do site</label>
+      </div>
+    </div>
+    <div class="ui error message">
+    </div>
+
+    <button class="ui primary button" type="submit">Finalizar</button>
+
+  </form>
+
+</div>
+
+
+<script>
+  $(document)
+  .ready(function () {
+    $('form').form({
+      email1: {
+        identifier: 'email',
+        rules: [{
+          type: 'empty',
+          prompt: 'Please enter a value'
+        }]
+      },
+      dropdown: {
+        identifier: 'full_name',
+        rules: [{
+          type: 'empty',
+          prompt: 'Please select a dropdown value'
+        }]
+      },
+      checkbox_terms: {
+        identifier: 'terms',
+        rules: [{
+          type: 'checked',
+          prompt: 'Please check the checkbox'
+        }]
+      }
+    }, {
+      inline: true,
+      onFailure: function () {
+        alert('failure');
+        return false;
+      },
+      onSuccess: function () {
+        alert('success');
+      }
+    });
+  }) 
+</script>
