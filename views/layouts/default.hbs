@@ -4,11 +4,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/images/favicon.ico">
+  <meta name="description" content='{{desc}}'>
+  <META NAME="ROBOTS" CONTENT='{{robots}}'>
+  {{!--<link rel="icon" href="/images/favicon.ico">--}}
 
-  <title>{{title}}</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff0000">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <title>{{title}} | Apartamentos em Lisboa</title>
 
   <!-- core CSS -->
   <link href="/semantic/semantic.min.css" rel="stylesheet">
@@ -91,12 +99,16 @@
         </div>
       </div>
       {{else}}
-      <div class="item">        
+      {{!--<div class="item">        
           <a href='/login' class='ui fluid button'>Entrar</a>          
       </div>
       <div class="item"> 
           <a href='/register' class='ui fluid positive button'>Registrar-se</a>  
       </div>      
+      </div>--}}
+            <div class="item">        
+          <a href='/login' class='ui fluid button positive'>Entrar</a>          
+      </div>          
       </div>
       {{/if}}
 
@@ -114,7 +126,7 @@
               .dropdown()           
           });
       </script>
-      <a href='/' class='header item'>IMAGEM DO LOGO</a>
+      <a href='/' class='header item'><img src='/images/aplisboa.png' alt='logo do apartamentosemlisboa.com' style='width: 12em'></a>
       <div class="ui item">
             <div class="ui fluid dropdown mobile hidden">Como funciona<i class="dropdown icon"></i>
                 <div class="menu">
@@ -168,11 +180,16 @@
         </div>
       </div>
       {{else}}
-      <div class="right item monitor only">
+      {{!--<div class="right item monitor only">
         <div class="ui buttons">
           <a href='/login' class='ui button'>Entrar</a>
           <div class="or" data-text="ou"></div>
           <a href='/register' class='ui positive button'>Registrar-se</a>
+        </div>
+      </div>--}}
+      <div class="right item monitor only">
+      <div class="ui buttons">
+          <a href='/login' class='ui button positive'>Entrar</a>          
         </div>
       </div>
       {{/if}}
@@ -240,6 +257,17 @@
           .dropdown()        
       });
   </script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-98310262-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 </body>
 

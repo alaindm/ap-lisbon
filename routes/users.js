@@ -49,13 +49,13 @@ router.post('/', (req, res, next) => {
               req.flash('error', value.message)              
             });    
             res.locals.messages = req.flash()        
-            res.render('register', req.body)                                    
+            res.render('register', {user: req.body, robots: 'NOINDEX, NOFOLLOW'})                                
           } else {
             req.flash('error', 'Erro no formulário. Revise seus dados.')
             res.locals.messages = req.flash()
             console.log(errors)
             console.log(req.body)
-            res.render('register', req.body)
+            res.render('register', {user: req.body, robots: 'NOINDEX, NOFOLLOW'})
           }          
         })
     })
@@ -67,7 +67,7 @@ router.post('/', (req, res, next) => {
 
 // Password recovery
 router.get('/password', function(req, res, next) {
-  res.render('passwordRecovery', { title: 'Password recovery' });
+  res.render('passwordRecovery', { title: 'Recuperação de Senha', desc: 'Se o usuário esqueceu a senha, aqui ele pode recuperar o acesso', robots: 'NOINDEX, NOFOLLOW'})
 });
 
 // User Auth
@@ -142,8 +142,8 @@ router.get('/activation', (req, res, next) =>{
                 .then(token => {
                   req.session.token = token
                   req.session.li = true // li -> logged in                  
-                  req.flash('success', 'Account Activated!')
-                  res.redirect(303,'/broker')
+                  // req.flash('success', 'Account Activated!')
+                  res.redirect(303,'/u/activated')
                 })              
             })
           .catch(e => {
@@ -162,9 +162,13 @@ router.get('/activation', (req, res, next) =>{
     })
 })
 
+router.get('/activated', authenticate, (req, res) => {
+  res.render('users/activated', { title: 'Conta Ativada', desc: 'Conta de usuário ativada', robots: 'NOINDEX, NOFOLLOW'})
+})
+
 // Forgot Password page
 router.get('/recovery', function(req, res, next){
-  res.render('users/recovery')
+  res.render('users/recovery', { title: 'Recuperação de Senha', desc: 'Recuperação de Senha', robots: 'NOINDEX, NOFOLLOW'})
 })
 
 // Send reset password token to email
@@ -176,7 +180,7 @@ router.post('/recovery', function(req, res){
         .generatePasswordToken()
         .then(token => {
           emailSend(req.body.email, "Golden Visa - Password Reset request", 'passwordRecovery', {token: token, firstName: user.email})              
-          res.render('users/gotoemail')   
+          res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
         })
     })
     .catch(e => {
@@ -196,7 +200,7 @@ router.get('/password_reset', function(req, res) {
           .findOne({_id: userId, validationToken: emailToken})
           .then(user => {
               req.session.password_token = emailToken 
-              res.render('users/password_reset')              
+              res.render('users/password_reset', { title: 'Cadastro de nova senha', robots: 'NOINDEX, NOFOLLOW'})             
             })
           .catch(e => {
             req.flash('error', 'Invalid password link.')
@@ -266,20 +270,37 @@ router.post('/password_reset', function(req, res) {
 
 // delete confirmation page
 router.get('/delete-user', authenticate, (req, res) => {  
-  res.render('users/delete', {id: req.user._id})
+  res.render('users/delete', {id: req.user._id, title: 'Deletar conta de usuário', robots: 'NOINDEX, NOFOLLOW'})
 });
 
 // destroy action
 router.delete('/:id', authenticate, function(req, res, next) {
   if(req.params.id  === req.user._id.toString()){
     User
-      .findOneAndRemove({
+      // .findOneAndRemove({
+      //   _id: req.user._id,
+      //   accessToken: req.session.token
+      // })
+      .findOne({
         _id: req.user._id,
         accessToken: req.session.token
+      })
+      .then(user => {
+        user.email_deleted= user.email
+        user.email = user.email_deleted + 'DELETED'
+        user.accessToken = null
+        user.account_validation = 'deleted'
+        req.session = null
+        req.user = null
+        user.save()          
       })
       .then(()=>{
         req.flash('success', 'User was removed')
         res.redirect(303,'/')
+      })
+      .catch(error => {
+        req.flash('error', 'Error interno. Contate o administrador.')
+        res.redirect(303, '/broker')
       })
   } else {
     req.flash('error', 'Invalid request')
@@ -289,7 +310,7 @@ router.delete('/:id', authenticate, function(req, res, next) {
 
 // edit form
 router.get('/:id/edit', authenticate, function(req, res, next) {  
-  res.render('users/edit', req.user)
+  res.render('users/edit', { user: req.user, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})
   console.log(req.user)  
 });
 
@@ -316,7 +337,7 @@ router.post('/:id', authenticate, function(req, res, next) {
       .catch(e=>{
         req.flash('error', e)
         res.locals.messages = req.flash
-        res.render('users/edit', req.body)
+        res.render('users/edit', {user: req.body, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})
       })      
     })
   } else {
@@ -326,7 +347,7 @@ router.post('/:id', authenticate, function(req, res, next) {
 });
 
 router.get('/gotoemail', (req, res)=>{
-  res.render('users/gotoemail') 
+  res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
 })
 
 router.get('/contracts', authenticate, (req, res)=>{
@@ -337,7 +358,19 @@ router.get('/contracts', authenticate, (req, res)=>{
       fs.readFile('views/users/partnershipContract.hbs', 'utf-8', function(error, source){        
         var template = handlebars.compile(source);
         var html = template(user);
-        var options = { format: 'A4' };        
+        var options = { 
+          format: 'A4',
+          "border": {
+            "top": "2in", // default is 0, units: mm, cm, in, px 
+            "right": "1in",
+            "bottom": "2in",
+            "left": "1.5in"
+          },
+          "header": {
+              "height": "45mm",
+              "contents": '<div style="text-align: center;">Header Test Message</div>'
+          }
+        };        
         pdf.create(html, options).toFile(`./views/partnershipContracts/${ramdomString}.pdf`, function(err, resp) {          
           if (err) return console.log(err);
           setTimeout(function(){
@@ -359,7 +392,7 @@ router.get('/contracts', authenticate, (req, res)=>{
     })
     .then((ramdomString) => {      
       console.log(ramdomString)
-      res.render('users/contracts', {id: ramdomString})
+      res.render('users/contracts', {id: ramdomString, title: 'Meu Contrato de Parceria', robots: 'NOINDEX, NOFOLLOW'})
     })
     .catch(error => {
       console.log(error)

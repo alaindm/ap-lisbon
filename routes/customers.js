@@ -48,13 +48,13 @@ router.post('/', authenticate, function(req, res, next) {
           req.flash('error', value.message)              
         });    
         res.locals.messages = req.flash()        
-        res.render('customers/new', req.body)                                    
+        res.render('customers/new', { customer: req.body, title: 'Cadastrar novo cliente', robots: 'NOINDEX, NOFOLLOW'})                                   
       } else {
         req.flash('error', 'Erro no formulário. Revise seus dados.')
         res.locals.messages = req.flash()
         console.log(errors)
         console.log(req.body)
-        res.render('customers/new', req.body)
+        res.render('customers/new', { customer: req.body, title: 'Cadastrar novo cliente', robots: 'NOINDEX, NOFOLLOW'})
       }      
     })
           

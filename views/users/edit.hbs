@@ -7,7 +7,7 @@
 
 <div class=" ui main container">
 
-  <form class='ui form' action="/u/{{id}}" method="post">
+  <form class='ui form' action="/u/{{user.id}}" method="post">
 
     <h2 class="ui header">Editar perfil</h2>
 
@@ -17,7 +17,7 @@
 
     <div class="field required">
       <label>Nome Completo</label>
-      <input type="text" name="full_name" placeholder="Nome Completo" value='{{full_name}}'>
+      <input type="text" name="full_name" placeholder="Nome Completo" value='{{user.full_name}}'>
     </div>
 
     <div class="field required">

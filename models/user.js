@@ -79,7 +79,11 @@ var UserSchema = new mongoose.Schema({
   ip_address: {
     type: String
   },
-  publisher: {
+  _source: {
+    // type: mongoose.Schema.Types.ObjectId
+    type: String
+  },
+  email_deleted: {
     type: String
   }
 });

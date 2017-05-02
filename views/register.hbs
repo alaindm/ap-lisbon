@@ -17,12 +17,12 @@
 
     <div class="field required">
       <label>E-mail</label>
-      <input type="text" name="email" placeholder="" value={{email}}>
+      <input type="text" name="email" placeholder="" value={{user.email}}>
     </div>
 
     <div class="field required">
       <label>Senha</label>
-      <input type="password" name="password" placeholder="" value={{password}}>
+      <input type="password" name="password" placeholder="" value={{user.password}}>
     </div>
 
     <div class="field required">
@@ -118,7 +118,7 @@
     </div>
     <div class="ui error message">
     </div>
-
+    <input type="hidden" name="source" value="{{ref}}" />
     <button class="ui primary button" type="submit">Finalizar</button>
 
   </form>
