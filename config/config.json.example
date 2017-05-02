@@ -1,0 +1,27 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/portugal-imoveis",
+    "JWT_SECRET": "kk28dl29ja3j0fj3jf9aj3f2",
+    "JWT_SECRET_PASSWORD": "i30dmcmg83cllf9ol202ndasw00xfjyt8k",
+    "SESSION_SECRET": "FADLSKJ9fkdfj093r391nfmva9JKJdo09",
+    "SENDGRID_API_KEY": "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",
+    "PARTNERSHIP_CONTRACT_SECRET": "9as9dgn329898g89s6n67nfd673hlk2gkl4384825hjngklsgdfk1w"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/portugal-imoveis",
+    "JWT_SECRET": "kk28dl29ja3j0fj3jf9aj3f1",
+    "JWT_SECRET_PASSWORD": "i30dmcmg83cllf9ol202ndasw00xfjytrf",
+    "SESSION_SECRET": "aADLSKJ9fkdfj093r391nfmva9JKJdo09",
+    "PARTNERSHIP_CONTRACT_SECRET": "9as9dgn329898g89s6n67nfd673hlk2gkl4384825hjngklsgdfk2w"
+  },
+  "production": {
+    "PORT": 8080,
+    "MONGODB_URI": "mongodb://localhost:27017/portugal-imoveis",
+    "JWT_SECRET": "XXXXXXXXXXXXXXXXXX",
+    "JWT_SECRET_PASSWORD": "YYYYYYYYYYYYYYYYYYYYYYYYYY",
+    "SESSION_SECRET": "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
+    "PARTNERSHIP_CONTRACT_SECRET": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+  }
+}
