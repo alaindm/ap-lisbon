@@ -10,7 +10,7 @@ if (env === 'development' || env === 'test') {
 }
 
 if (env === 'production') {
-  var config = require('../config.prod.json');
+  var config = require('../../config.prod.json');
   var envConfig = config[env];
 
   Object.keys(envConfig).forEach((key) => {
