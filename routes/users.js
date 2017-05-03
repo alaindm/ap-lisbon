@@ -9,6 +9,7 @@ const handlebars = require('handlebars')
 const fs = require('fs')
 var pdf = require('html-pdf')
 const {SHA256} = require('crypto-js');
+const moment = require('moment')
 
 router.use( function( req, res, next ) {
     // this middleware will call for each requested
@@ -28,8 +29,8 @@ router.use( function( req, res, next ) {
 
 // create action
 router.post('/', (req, res, next) => {
-  var userParams = _.pick(req.body, ['email', 'password'])
-  userParams.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  var userParams = _.pick(req.body, ['email', 'password', 'full_name', 'cpf', 'nickname', 'facebook_url', 'phone_number', 'work_field', 'creci', 'crea', 'address.street', 'address.zip', 'address.city', 'address.state', 'address.country', 'bank_account.bank', 'bank_account.branch', 'bank_account.account_number', 'iban', 'source'])
+  userParams.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   User
     .emailInUse(userParams.email)
     .then(validEmail => {
@@ -40,7 +41,7 @@ router.post('/', (req, res, next) => {
           return user.generatePasswordToken()
         })
         .then(regToken => {          
-          emailSend(userParams.email, "Golden Visa - Please activate your account", 'accountActivation', {token: regToken, firstName: userParams.email})       
+          emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: userParams.full_name})       
           res.redirect(303, '/u/gotoemail')   
         })
         .catch(errors => {          
@@ -49,18 +50,18 @@ router.post('/', (req, res, next) => {
               req.flash('error', value.message)              
             });    
             res.locals.messages = req.flash()        
-            res.render('register', {user: req.body, robots: 'NOINDEX, NOFOLLOW'})                                
+            res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source })                                
           } else {
             req.flash('error', 'Erro no formulário. Revise seus dados.')
             res.locals.messages = req.flash()
             console.log(errors)
             console.log(req.body)
-            res.render('register', {user: req.body, robots: 'NOINDEX, NOFOLLOW'})
+            res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
           }          
         })
     })
     .catch(emailAlreadyRegistered => {
-      req.flash('error', 'E-mail already registered')
+      req.flash('error', 'E-mail já registrado.')
       res.redirect(303, '/register')
     })   
 });
@@ -74,30 +75,30 @@ router.get('/password', function(req, res, next) {
 router.post('/login', function(req, res, next) {
   var params = _.pick(req.body, ['email', 'password']);
   User
-    .findByCredentials(params.email, params.password)
-    .then((user)=>{
-      if(user.account_validation === 'active'){
+    .findByCredentials(params.email, params.password)    
+    .then((user)=>{      
+      if(user.account_validation === 'active'){        
         return user
                 .generateAuthToken()
-                .then(token => {
+                .then(token => {                  
                   if(req.body.remember){
                     req.sessionOptions.maxAge = 30 * 24 * 60 * 60 * 1000 // 30 days
-                  }
+                  }                  
                   req.session.token = token
                   req.session.li = true // logged in
                   res.redirect(303,'/broker')
                 })
-                .catch(e => {
-                  req.flash('error', 'Internal server error')
+                .catch(e => {                  
+                  req.flash('error', 'Erro do servidor.')                  
                   res.redirect(303,'/')
                 })
       } else{
-        req.flash('error','Your account was not validated')
+        req.flash('error','Sua conta não foi validada.')
         res.redirect(303, '/u/recovery')
       }
     }) 
     .catch((e) => {
-      req.flash('error', 'Invalid Login/Password combination')
+      req.flash('error', 'Usuário/Senha incorretos.')    
       res.redirect(303,'/login')
     })
 })
@@ -148,16 +149,16 @@ router.get('/activation', (req, res, next) =>{
             })
           .catch(e => {
             console.log(e)
-            req.flash('error', 'Invalid activation link.')
+            req.flash('error', 'Link de ativação inválido.')
             res.redirect(303, '/')
           })       
       } else {
-        req.flash('error', 'Expiried link. Please contact the administrator.')
+        req.flash('error', 'Link expiridado. Por favor, contate o administrador do sistema.')
         res.redirect(303,'/')
       }    
     })
     .catch( e => {
-      req.flash('error','Invalid or Expirated link.')
+      req.flash('error','Link inválido ou expirado.')
       res.redirect(303,'/')
     })
 })
@@ -179,12 +180,12 @@ router.post('/recovery', function(req, res){
       user
         .generatePasswordToken()
         .then(token => {
-          emailSend(req.body.email, "Golden Visa - Password Reset request", 'passwordRecovery', {token: token, firstName: user.email})              
+          emailSend(req.body.email, "Golden Visa - Password Reset request", 'passwordRecovery', {token: token, firstName: user.full_name})              
           res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
         })
     })
     .catch(e => {
-      req.flash('error', 'E-mail not registered.')
+      req.flash('error', 'E-mail não registrado.')
       res.redirect(303, '/users/recovery')
     })
 })
@@ -207,12 +208,12 @@ router.get('/password_reset', function(req, res) {
             res.redirect(303, '/')
           })       
       } else {
-        req.flash('error', 'Expiried link. Please contact the administrator.')
+        req.flash('error', 'Link expirado.')
         res.redirect(303,'/')
       }    
     })
     .catch( e => {
-      req.flash('error','Invalid or Expirated link.')
+      req.flash('error','Link inválido ou expirado.')
       res.redirect(303,'/')
     })
 })
@@ -244,22 +245,22 @@ router.post('/password_reset', function(req, res) {
                     res.redirect(303,'/broker')
                   })
                   .catch(e => {
-                    req.flash('error', 'Internal server error')
+                    req.flash('error', 'Erro interno no servidor.')
                     res.redirect(303,'/')
                   })                  
                 })
               .catch(e => {
-                req.flash('error', 'Invalid password link.')
+                req.flash('error', 'Link de senha inválido.')
                 res.redirect(303, '/')
               })
           })        
       } else {
-        req.flash('error', 'Expiried link. Please contact the administrator.')
+        req.flash('error', 'Link expirado.')
         res.redirect(303,'/')
       }    
     })
     .catch( e => {
-      req.flash('error','Invalid or Expirated link.')
+      req.flash('error','Link inválido ou expirado.')
       res.redirect(303,'/')
     })
   // } else {
@@ -295,7 +296,7 @@ router.delete('/:id', authenticate, function(req, res, next) {
         user.save()          
       })
       .then(()=>{
-        req.flash('success', 'User was removed')
+        req.flash('success', 'Usuário foi removido.')
         res.redirect(303,'/')
       })
       .catch(error => {
@@ -331,7 +332,7 @@ router.post('/:id', authenticate, function(req, res, next) {
       user.email = req.user.email
       user.full_name = req.body.full_name
       user.save().then(()=>{
-        req.flash('success', 'User data was updated')
+        req.flash('success', 'Dados foram atualizados.')
         res.redirect('/broker')
       })
       .catch(e=>{
@@ -341,7 +342,7 @@ router.post('/:id', authenticate, function(req, res, next) {
       })      
     })
   } else {
-    req.flash('error', 'Invalid request')
+    req.flash('error', 'Requisição inválida.')
     res.redirect(303, '/broker')
   }
 });
@@ -354,6 +355,8 @@ router.get('/contracts', authenticate, (req, res)=>{
   User
     .findOne({_id: req.user._id})
     .then(user => {
+      moment.locale('pt-BR')
+      user.date = moment().format('LL')
       var ramdomString = SHA256(JSON.stringify(user._id) + process.env.PARTNERSHIP_CONTRACT_SECRET).toString()
       fs.readFile('views/users/partnershipContract.hbs', 'utf-8', function(error, source){        
         var template = handlebars.compile(source);
@@ -361,14 +364,14 @@ router.get('/contracts', authenticate, (req, res)=>{
         var options = { 
           format: 'A4',
           "border": {
-            "top": "2in", // default is 0, units: mm, cm, in, px 
-            "right": "1in",
-            "bottom": "2in",
-            "left": "1.5in"
+            "top": "1in", // default is 0, units: mm, cm, in, px 
+            "right": "0.5in",
+            "bottom": "0.5in",
+            "left": "0.5in"
           },
           "header": {
-              "height": "45mm",
-              "contents": '<div style="text-align: center;">Header Test Message</div>'
+              "height": "5mm",
+              "contents": '<div style="text-align: center;">CONTRATO DE PARCERIA</div>'
           }
         };        
         pdf.create(html, options).toFile(`./views/partnershipContracts/${ramdomString}.pdf`, function(err, resp) {          

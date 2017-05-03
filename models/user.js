@@ -19,7 +19,11 @@ var UserSchema = new mongoose.Schema({
   password: {
     type: String,
     require: true,
-    minlength: 4
+    minlength: 4,
+    validate: {
+      validator: (v) => validator.isLength(v, {min:8, max:60}),
+      message: 'Senha precisa ter no mínimo 8 caracteres.'
+    }
   },
   accessToken: {
     type: String,
@@ -34,36 +38,68 @@ var UserSchema = new mongoose.Schema({
   },
   full_name: {
     type: String,
-    required: false,
-    minlength: 4
+    required: true,
+    minlength: 3,
+    validate: {
+      validator: (v) => validator.isLength(v, {min:4, max:150}),
+      message: 'Nome Completo precisa ter no mínimo 4 caracteres.'
+    }
   },
   cpf: {
-    type: Number,
-    required: false
+    type: String,
+    required: true,
+    validate: {
+      validator: (v) => validator.isLength(v, {min:11, max:11}),
+      message: 'CPF são 11 números.'
+    }
   },
   nickname: {
-    type: String
+    type: String,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:60}),
+      message: 'Apelido não pode ter mais do que 60 caracteres.'
+    }
   },
   facebook_url: {
-    type: String
+    type: String,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:150}),
+      message: 'Link do Facebook não pode ter mais do que 150 caracteres.'
+    }
   },
   phone_number: {
     type: String,
-    required: false
+    required: false,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:20}),
+      message: 'Telefone não pode ter mais do que 20 caracteres.'
+    }
   },
   work_field: {
     type: String,
-    required: false
+    required: false,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:25}),
+      message: 'Área de Trabalho não pode ter mais do que 25 caracteres.'
+    }
   },
   creci: {
-    type: String
+    type: String,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:10}),
+      message: 'CRECI não pode ter mais do que 10 caracteres.'
+    }
   },
   crea: {
-    type: String
+    type: String,
+    validate: {
+      validator: (v) => validator.isLength(v, {max:10}),
+      message: 'CREA não pode ter mais do que 10 caracteres.'
+    }
   },
   address: {
     street: String,
-    zip: Number,
+    zip: String,
     city: String,
     state: String,
     country: String
@@ -79,7 +115,7 @@ var UserSchema = new mongoose.Schema({
   ip_address: {
     type: String
   },
-  _source: {
+  source: {
     // type: mongoose.Schema.Types.ObjectId
     type: String
   },
@@ -115,7 +151,7 @@ UserSchema.methods.generatePasswordToken = function () {
 UserSchema.methods.generateAuthToken = function () {
   var user = this
   var token = jwt.sign({id: user._id.toHexString(), type: 'access'}, process.env.JWT_SECRET).toString();
-  user.accessToken = token
+  user.accessToken = token  
   return user.save().then(() => {    
     return token;
   });
@@ -164,6 +200,7 @@ UserSchema.statics.findByCredentials = function (email, password) {
           .findOne({email})
           .then((user) => {
             if (!user) {
+              console.log('email não encontrado')
               return Promise.reject();
             }
             return new Promise((resolve, reject) => {
@@ -171,14 +208,13 @@ UserSchema.statics.findByCredentials = function (email, password) {
               bcrypt.compare(password, user.password, (err, res) => {
                 if (res) {
                   resolve(user);
-                } else {
+                } else {                  
                   reject();
                 }
               });
             });
           })
-          .catch(e => {
-            console.log('User email not found in DB')
+          .catch(e => {            
             return Promise.reject();
           })
 };

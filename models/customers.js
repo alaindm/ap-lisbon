@@ -5,13 +5,18 @@ const _ = require('lodash');
 var CustomerSchema = new mongoose.Schema({
     cpf: {
         type: String,
-        required: true,
-        unique: true        
+        unique: true,
+        validate: {
+            validator: (v) => validator.isLength(v, {min:14, max:14}),
+            message: 'CPF são 11 números.'
+        }      
     },
     full_name: {
         type: String,
-        required: false,
-        minlength: 4
+        validate: {
+            validator: (v) => validator.isLength(v, {min:3, max:100}),
+            message: 'Nome Completo é necessário.'
+        } 
     },
     spouse: {
         type: String
@@ -29,17 +34,13 @@ var CustomerSchema = new mongoose.Schema({
         trim: true,
         validate: {
             validator: validator.isEmail,
-            message: '{VALUE} is not a valid email'
+            message: 'E-mail é obrigatório.'
         },
     },
     email2: {
         type: String,
         required: false,
-        trim: true,
-        validate: {
-            validator: validator.isEmail,
-            message: '{VALUE} is not a valid email'
-        }
+        trim: true
     },
     skype: {
         type: String
@@ -77,19 +78,19 @@ var CustomerSchema = new mongoose.Schema({
         type: String
     },
     property_value: {
-
+        type: String
     },
     golden_visa: {
         type: Boolean
     },
     city_of_interest: {
-        
+        type: String
     },
     investment_profile:{
-
+        type: String
     },
     property_type: {
-
+        type: String
     },
     financing_needed: {
         type: Boolean

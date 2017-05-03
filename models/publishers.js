@@ -13,7 +13,7 @@ var PublisherSchema = new mongoose.Schema({
         trim: true,
         validate: {
             validator: validator.isEmail,
-            message: '{VALUE} is not a valid email'
+            message: '{VALUE} não é um e-mail válido.'
         },
     },
     facebook_url: {

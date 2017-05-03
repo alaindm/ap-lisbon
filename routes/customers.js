@@ -23,15 +23,13 @@ router.get('/', authenticate, function(req, res, next) {
 
 // create form
 router.get('/new', authenticate, function(req, res) {  
-  res.render('customers/new', { 
-    title: 'Novo Cliente'
-  });
+  res.render('customers/new', {title: 'Novo Cliente'});
 });
 
 // create action
 router.post('/', authenticate, function(req, res, next) {  
   var ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  var customerParams = _.pick(req.body, ['cpf', 'full_name'])
+  var customerParams = _.pick(req.body, ['cpf', 'full_name', 'spouse', 'phone_number', 'phone_number2', 'email1', 'email2', 'skype', 'address.street', 'address.city', 'address.state','address.country', 'nationality1', 'nationality2', 'time_to_contract', 'work_field', 'company', 'government_employee', 'interests', 'golden_visa', 'city_of_interest', 'investment_profile', 'property_type', 'financing_needed', 'amount_available', 'customer_informed'])
   customerParams.broker_ip_address = ip_address
   customerParams._creator = req.user._id    
   var customer = new Customer(customerParams)
@@ -72,7 +70,12 @@ router.get('/:id', authenticate, function(req, res, next) {
   Customer
     .findOne({_id: customerId})
     .then(customer => {
-      res.render('customers/show', {title: `Informações de ${customer.full_name}`, customer})
+      if (customer._creator.toString() === req.user._id.toString()) {
+        res.render('customers/show', {title: `Informações de ${customer.full_name}`, customer})
+      } else {
+      res.locals.flash = req.flash('error', 'Não autorizado')
+      res.redirect(303, '/broker')
+      }
     })
     .catch(error => {
       console.log(error)

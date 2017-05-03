@@ -22,6 +22,7 @@
     "html-pdf": "^2.1.0",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.4",
     "morgan": "~1.7.0",

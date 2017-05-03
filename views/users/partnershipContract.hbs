@@ -1,9 +1,8 @@
-<div id="pageHeader">Default header</div>
-<div id="pageFooter">Default footer</div>
+{{!--<div id="pageHeader">Default header</div>
+<div id="pageFooter">Default footer</div>--}}
 <h1>ACORDO DE CONSULTORIA IMOBILIÁRIA</h1>
 
-{{email}}
-<p>ENTRE: {{full_name}}, CPF {{cpf}}, RG {{id-doc}}, residente e domiciliado na {{address}}, Bairro {{bairro}}, {{zip}}, {{city}}, {{state}}, {{country}}, adiante designada por <strong>PRIMEIRA OUTORGANTE</strong> e PARTILHARADICAL – MEDIAÇÃO IMOBILIÁRIA LDA, com sede em Lisboa, Portugal, na Rua Cidade de Bissau, Lote 49, Loja 49 A e B, com o nº de identificação de pessoa colectiva 510372180, neste ato representada pelo seus Gerentes Nuno Miguel Gonçalves Ribeiro Ricardo, português, e Paula Cristina Barbosa Pinto Fernandes, portuguesa, ambos com domicílio profissional na sede da sua representada, adiante designada por  AGÊNCIA.</p>
+<p>ENTRE: {{full_name}}, CPF {{cpf}}, residente e domiciliado na {{address.street}}, CEP {{address.zip}}, {{address.city}}, {{address.state}}, {{address.country}}, adiante designada por <strong>PRIMEIRA OUTORGANTE</strong> e PARTILHARADICAL – MEDIAÇÃO IMOBILIÁRIA LDA, com sede em Lisboa, Portugal, na Rua Cidade de Bissau, Lote 49, Loja 49 A e B, com o nº de identificação de pessoa colectiva 510372180, neste ato representada pelo seus Gerentes Nuno Miguel Gonçalves Ribeiro Ricardo, português, e Paula Cristina Barbosa Pinto Fernandes, portuguesa, ambos com domicílio profissional na sede da sua representada, adiante designada por  AGÊNCIA.</p>
 
 <p>Considerando que:</p>
 
@@ -77,7 +76,7 @@ Para qualquer litígio emergente do presente acordo, derivado da sua interpreta�
 Este contrato é celebrado e assinado em duplicado, com duas testemunhas, e cada uma das partes deve manter um original devidamente assinado.
 
 
-Lisboa, Portugal, {{date}}.
+{{address.city}}, {{date}}.
 
 
 PRIMEIRA OUTORGANTE	

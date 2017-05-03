@@ -16,152 +16,152 @@
 
     <div class="field required">
       <label>Nome Completo</label>
-      <input type="text" name="full_name" placeholder="Nome Completo">
+      <input type="text" name="full_name" placeholder="Nome Completo" value='{{customer.full_name}}'>
     </div>
     
     <div class="field">
       <label>Conjuge</label>
-      <input type="text" name="spouse" placeholder="Nome do Conjuge">
+      <input type="text" name="spouse" placeholder="Nome do Conjuge" value='{{customer.spouse}}'>
     </div>
 
     <div class="field">
       <label>Telefone Residencial (com DDD)</label>
-      <input type="number" name="phone_number1" placeholder="(11) 5012-3456">
+      <input type="number" name="phone_number1" placeholder="(11) 5012-3456" value='{{customer.phone_number1}}'>
     </div>
 
     <div class="field">
       <label>Telefone Celular (com DDD)</label>
-      <input type="number" name="phone_number2" placeholder="(11) 91234-5678">
+      <input type="number" name="phone_number2" placeholder="(11) 91234-5678" value='{{customer.phone_number2}}'>
     </div>
     
     <div class="field required">
       <label>E-mail Pessoal</label>
-      <input type="email" name="email1" placeholder="E-Mail">
+      <input type="email" name="email1" placeholder="E-Mail" value='{{customer.email1}}'>
     </div>
 
     <div class="field">
       <label>E-mail Alternativo</label>
-      <input type="email" name="email2" placeholder="E-Mail">
+      <input type="email" name="email2" placeholder="E-Mail" value='{{customer.email2}}'>
     </div>
 
     <div class="field">
       <label>Skype</label>
-      <input type="text" name="skype" placeholder="Usuario no Skype">
+      <input type="text" name="skype" placeholder="Usuario no Skype" value='{{customer.skype}}'>
     </div>
 
     <div class="field">
       <label>Link da página do perfil no Facebook</label>
-      <input type="url" name="facebook_url" placeholder="Cole o link aqui...">
+      <input type="url" name="facebook_url" placeholder="Cole o link aqui..." value='{{customer.facebook_url}}'>
     </div>
 
     <div class="field">
       <label>Endereço completo (Rua, número e complemento)</label>
-      <input type="text" name="street" placeholder="Avenida Brasil, 100 Ap.1001">
+      <input type="text" name="address.street" placeholder="Avenida Brasil, 100 Ap.1001" value='{{customer.address.street}}'>
     </div>
 
     <div class="field">
       <label>Cidade</label>
-      <input type="text" name="city" placeholder="Cidade">
+      <input type="text" name="address.city" placeholder="Cidade" value='{{customer.address.street}}'>
     </div>
 
     <div class="field">
       <label>Estado</label>
-      <input type="text" name="state" placeholder="Sigla do Estado">
+      <input type="text" name="address.state" placeholder="Sigla do Estado" value='{{customer.address.state}}'>
     </div>
 
     <div class="field">
       <label>País</label>
-      <input type="text" name="country" placeholder="Brasil">
+      <input type="text" name="address.country" placeholder="Brasil" value='{{customer.address.country}}'>
     </div>
 
     <div class="field">
       <label>Nacionalidade</label>
-      <input type="text" name="nationality1" placeholder="">
+      <input type="text" name="nationality1" placeholder="" value='{{customer.nationality1}}'>
     </div>
 
     <div class="field">
       <label>Nacionalidade</label>
-      <input type="text" name="nationality2" placeholder="">
+      <input type="text" name="nationality2" placeholder="" value='{{customer.nationality2}}'>
     </div>  
 
     <div class="field">
       <label>Horário para Contato</label>
-      <input type="text" name="time_to_contact" placeholder="9:00 às 17:00h">
+      <input type="text" name="time_to_contact" placeholder="9:00 às 17:00h" value='{{customer.time_to_contact}}'>
     </div>
 
     <div class="field">
       <label>Área de trabalho / Profissão</label>
-      <input type="text" name="work_field" placeholder="Corretor, Engenheiro....">
+      <input type="text" name="work_field" placeholder="Corretor, Engenheiro...." value='{{customer.work_field}}'>
     </div>
 
     <div class="field">
-      <label>Empresa onde trabalha/label>
-      <input type="text" name="company" placeholder="ABC Ltda.">
+      <label>Empresa onde trabalha</label>
+      <input type="text" name="company" placeholder="ABC Ltda." value='{{customer.company}}'>
     </div>
 
     <div class="field">
       <div class="ui checkbox">
-        <input type="checkbox" name="government_employee">
+        <input type="checkbox" name="government_employee" value='{{customer.government_employee}}'>
         <label>Funcionário Público?</label>
       </div>
     </div>
 
     <div class="field">
-      <label>Interesses</label>
-      <input type="text" name="interests" placeholder="Investimentos, Futebol, Viagens...">
+      <label>Faixa de valor do imóvel</label>
+      <input type="text" name="property_value" placeholder="EUR 400.000" value='{{customer.property_value}}'>
     </div>
 
     <div class="field">
-      <label>Área de trabalho / Profissão</label>
-      <input type="text" name="property_value" placeholder="Corretor, Engenheiro....">
+      <label>Interesses</label>
+      <input type="text" name="interests" placeholder="Investimentos, Futebol, Viagens..." value='{{customer.interests}}'>
     </div>
 
     <div class="field">
       <div class="ui checkbox">
-        <input type="checkbox" name="property_value">
+        <input type="checkbox" name="golden_visa" value='{{customer.golden_visa}}'>
         <label>Interesse no "Golden Visa"</label>
       </div>
     </div>
 
     <div class="field">
       <label>Cidades de interesse</label>
-      <input type="text" name="city_of_interest" placeholder="Lisboa, Porto, etc.">
+      <input type="text" name="city_of_interest" placeholder="Lisboa, Porto, etc." value='{{customer.city_of_interest}}'>
     </div>
 
     <div class="field">
-      <label>hghdfg</label>
-      <input type="text" name="investment_profile" placeholder="Corretor, Engenheiro....">
+      <label>Perfil de Investimento</label>
+      <input type="text" name="investment_profile" placeholder="Moradia pŕopria, investimento longo prazo, etc." value='{{customer.investment_profile}}'>
     </div>
 
     <div class="field">
-      <label>hghdfg</label>
-      <input type="text" name="property_type" placeholder="Corretor, Engenheiro....">
+      <label>Tipo de imóvel que tem interesse</label>
+      <input type="text" name="property_type" placeholder="apartamento..." value='{{customer.property_type}}'>
     </div>
 
     <div class="field">
       <div class="ui checkbox">
-        <input type="checkbox" name="financing_needed">
+        <input type="checkbox" name="financing_needed" value='{{customer.financing_needed}}'>
         <label>Precisa de financiamento?</label>
       </div>      
     </div>
 
     <div class="field">
       <label>Valor disponível no ato ("Entrada") em Reais (R$)</label>
-      <input type="number" name="amount_available" placeholder="Valor">
+      <input type="number" name="amount_available" placeholder="Valor" value='{{customer.amount_available}}'>
     </div>
     
-    <div class="field">
+    <div class="field required">
       <div class="ui checkbox">
-        <input type="checkbox" name="customer_informed">
+        <input type="checkbox" name="customer_informed" value='{{customer.customer_informed}}'>
         <label>Seu cliente foi informado que está indicando atendimento para a Remax ExpoGoup?</label>
       </div>
       </br>
-      <p>Caso o cliente não tenha interesse em investir em Portugal e essa conduta for identificada recorrente seu cadastro na plataforma pode ser cancelado. O consultor parceiro é responsável pela prospecção e indicação de leads qualificados como interessados em Portugal.</p>
+      <p style='margin-top: 10px; color: gray'>Caso o cliente não tenha interesse em investir em Portugal e essa conduta for identificada como recorrente, seu cadastro na plataforma pode ser cancelado. O consultor parceiro é responsável pela prospecção e indicação de leads qualificados como interessados em Portugal.</p>
     </div>
 
-    <div class="field">
+    <div class="field required">
       <div class="ui checkbox">
-        <input type="checkbox" name="contract">
+        <input type="checkbox" name="contract" value='{{customer.contract}}'>
         <label>Concordo com o <a href='/contract' target="_blank">contrato de parceria</a> do ExpoGroup</label>
       </div>      
     </div>
@@ -176,4 +176,60 @@
         $(document).ready(function(){
         $("#cpf").mask("***.***.***-**");
 });
+</script>
+
+<script>
+  $(document)
+  .ready(function () {
+    $('form').form({
+      email: {
+        identifier: 'email1',
+        rules: [{
+          type: 'empty',
+          prompt: 'Insira um e-mail válido'
+        }]
+      },
+      full_name: {
+        identifier: 'full_name',
+        rules: [{
+          type: 'empty',
+          prompt: 'Insira seu nome completo'
+        }]
+      },
+      cpf: {
+        identifier: 'cpf',
+        rules: [{
+          type: 'empty',
+          prompt: 'CPF composto por 11 números é obrigatório.'
+        }]
+      },
+      customer_informed: {
+        identifier: 'customer_informed',
+        rules: [{
+          type: 'checked',
+          prompt: 'É necessário ter informado o seu cliente.'
+        }]
+      },
+      contract: {
+        identifier: 'contract',
+        rules: [{
+          type: 'checked',
+          prompt: 'É necessário aceitar os termos da parceria com o Expo Group.'
+        }]
+      }
+    }
+    , {
+      inline: true,
+      onFailure: function () {
+        var $container = $("html,body");
+        var $scrollTo = $('.prompt');
+        $container.animate({scrollTop: $scrollTo.offset().top - $container.offset().top -200, scrollLeft: 0});
+        return false;
+      },
+      onSuccess: function () {
+        {{!--alert('success');--}}
+      }
+    }
+    );
+  }) 
 </script>

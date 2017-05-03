@@ -21,12 +21,12 @@ var authenticate = (req, res, next) => {
         next();
       } else {
         req.session.li = false // li -> logged in  
-        res.status(401).send('Not authorized');
+        res.status(401).send('Não autorizado.');
       }
     })
     .catch((e) => {
       req.session.li = false // li -> logged in
-      res.status(401).send('Not authorized');
+      res.status(401).send('Não autorizado.');
     })
 };
 

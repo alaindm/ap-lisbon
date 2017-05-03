@@ -9,8 +9,9 @@ router.get('/', function(req, res, next) {
 });
 
 // Register new user
-router.get('/register', function(req, res, next) {  
-  res.render('register', { title: 'Register', desc: 'Cadastro de novo usuário', robots: 'NOINDEX, NOFOLLOW', css: ['register.css'], ref: req.query.ref});
+router.get('/register', function(req, res, next) {
+  var divSource = req.query.ref || req.session.ref  
+  res.render('register', { title: 'Register', desc: 'Cadastro de novo usuário', robots: 'NOINDEX, NOFOLLOW', ref: divSource});
 });
 
 // User Login Page
@@ -39,8 +40,13 @@ router.get('/broker', authenticate, function(req, res, next) {
 });
 
 // FAQ 
-router.get('/how', function(req, res, next) {     
-  res.render('how', { title: 'Como funciona', desc: 'Como funciona o modelo de negócio do website Apartamentos em Lisboa', robots: 'INDEX, FOLLOW'})
+router.get('/faq', function(req, res, next) {     
+  res.render('faq', { title: 'Perguntas Frequentes', desc: 'Dúvidas frequentes sobre o Apartamentos em Lisboa', robots: 'INDEX, FOLLOW'})
+})
+
+// Modelo de Negócio
+router.get('/como-funciona', function(req, res, next) {     
+  res.render('como-funciona', { title: 'Como funciona?', desc: 'Como funciona o modelo de negócio do website Apartamentos em Lisboa', robots: 'INDEX, FOLLOW'})
 })
 
 // Contrato Padrão
@@ -50,7 +56,8 @@ router.get('/contract', authenticate, function(req, res, next) {
 
 // Publisher SHOW 
 router.get('/divulgador-exemplo', function(req, res, next) {
-  res.render('divulgador-exemplo', { ref: 'div-exemplo', title: 'Página de Exemplo do Divulgador', desc: 'Divulgador-exemplo é um parceiro do apartamentosemlisboa.com . Aqui o corretor pode se cadastrar para indicar um cliente e direciona-lo a um corretor em Portugal', robots: 'INDEX, FOLLOW'});
+  req.session.ref = 'divulgador-exemplo'
+  res.render('divulgador-exemplo', { ref: 'divulgador-exemplo', title: 'Página de Exemplo do Divulgador', desc: 'Divulgador-exemplo é um parceiro do apartamentosemlisboa.com . Aqui o corretor pode se cadastrar para indicar um cliente e direciona-lo a um corretor em Portugal', robots: 'INDEX, FOLLOW'});
 })
 
 module.exports = router

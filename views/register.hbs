@@ -32,92 +32,91 @@
 
     <div class="field required">
       <label>Nome Completo</label>
-      <input type="text" name="full_name" placeholder="Nome Completo">
+      <input type="text" name="full_name" placeholder="Nome Completo" value={{user.full_name}}>
     </div>
 
     <div class="field required">
       <label>C.P.F.</label>
-      <input type="number" name="cpf" placeholder="">
+      <input type="number" name="cpf" placeholder="" value={{user.cpf}}>
     </div>
 
     <div class="field">
       <label>Apelido de trabalho (Se tiver)</label>
-      <input type="text" name="nickname" placeholder="">
+      <input type="text" name="nickname" placeholder="" value={{user.nickname}}>
     </div>
 
     <div class="field">
       <label>Link da página do seu perfil no Facebook</label>
-      <input type="url" name="facebook_url" placeholder="Cole o link aqui...">
+      <input type="url" name="facebook_url" placeholder="Cole o link aqui..." value={{user.facebook_url}}>
     </div>
 
     <div class="field required">
       <label>Telefone para contato (com DDD)</label>
-      <input type="number" name="phone_number" placeholder="(11) 91234-5678">
+      <input type="number" name="phone_number" placeholder="(11) 91234-5678" value={{user.phone_number}}>
     </div>
 
     <div class="field required">
       <label>Área de trabalho / Profissão</label>
-      <input type="text" name="work_field" placeholder="Corretor, Engenheiro....">
+      <input type="text" name="work_field" placeholder="Corretor, Engenheiro...." value={{user.work_field}}>
     </div>
 
     <div class="field">
       <label>CRECI</label>
-      <input type="number" name="creci" placeholder="Número do seu CRECI">
+      <input type="number" name="creci" placeholder="Número do seu CRECI" value={{user.creci}}>
     </div>
 
     <div class="field">
       <label>CREA</label>
-      <input type="text" name="crea" placeholder="Número do seu CREA">
+      <input type="text" name="crea" placeholder="Número do seu CREA" value={{user.crea}}>
     </div>
 
     <div class="field required">
       <label>Endereço completo (Rua, número e complemento)</label>
-      <input type="text" name="street" placeholder="Avenida Brasil, 100 Ap.1001">
+      <input type="text" name="address.street" placeholder="Avenida Brasil, 100 Ap.1001" value={{user.address.street}}>
     </div>
 
     <div class="field required">
       <label>Cidade</label>
-      <input type="text" name="city" placeholder="Cidade">
+      <input type="text" name="address.city" placeholder="Cidade" value={{user.address.city}}>
     </div>
 
     <div class="field required">
       <label>Estado</label>
-      <input type="text" name="state" placeholder="Sigla do Estado">
+      <input type="text" name="address.state" placeholder="Sigla do Estado" value={{user.address.state}}>
     </div>
 
     <div class="field required">
       <label>País</label>
-      <input type="text" name="country" placeholder="Brasil">
+      <input type="text" name="address.country" placeholder="Brasil" value={{user.address.country}}>
     </div>
 
     <div class="field">
       <label>Banco</label>
-      <input type="text" name="bank" placeholder="Nome ou número do Banco">
+      <input type="text" name="bank_account.bank" placeholder="Nome ou número do Banco" value={{user.bank_account.bank}}>
     </div>
 
     <div class="field">
       <label>Agência</label>
-      <input type="text" name="branch" placeholder="Número de agência com dígito">
+      <input type="text" name="bank_account.branch" placeholder="Número de agência com dígito" value={{user.bank_account.branch}}>
     </div>
 
     <div class="field">
       <label>Conta Corrente</label>
-      <input type="text" name="account_number" placeholder="Conta Corrent com dígito">
+      <input type="text" name="bank_account.account_number" placeholder="Conta Corrent com dígito" value={{user.bank_account.account_number}}>
     </div>
 
     <div class="field">
       <label>IBAN (Número internacional de Conta Bancária)</label>
-      <input type="number" name="iban" placeholder="">
+      <input type="number" name="iban" placeholder="" value={{user.iban}}>
     </div>
 
     <div class="field required">
       <div class="ui checkbox">
-        <input type="checkbox" name="terms">
+        <input type="checkbox" name="terms" value={{user.terms}}>
         <label>Concordo com os <a href='/tos' target="_blank">termos de uso</a> e <a href='/pp' target="_blank">política de privacidade</a> do site</label>
       </div>
     </div>
-    <div class="ui error message">
-    </div>
+    {{!--<div class="ui error message">     </div>--}}
     <input type="hidden" name="source" value="{{ref}}" />
     <button class="ui primary button" type="submit">Finalizar</button>
 
@@ -130,36 +129,99 @@
   $(document)
   .ready(function () {
     $('form').form({
-      email1: {
+      email: {
         identifier: 'email',
         rules: [{
           type: 'empty',
-          prompt: 'Please enter a value'
+          prompt: 'Insira um e-mail válido'
         }]
       },
-      dropdown: {
+      full_name: {
         identifier: 'full_name',
         rules: [{
           type: 'empty',
-          prompt: 'Please select a dropdown value'
+          prompt: 'Insira seu nome completo'
+        }]
+      },
+      password: {
+        identifier: 'password',
+        rules: [{
+          type: 'empty',
+          prompt: 'Senha é necessária'
+        },{
+          type: 'length[8]',
+          prompt: 'Senha precisa ter pelo menos 8 caracteres.'
+        }]
+      },
+      password_confirmation: {
+        identifier: 'password_confirmation',
+        rules: [{
+          type: 'match[password]',
+          prompt: 'Senhas não confererem.'
+        }]
+      },
+      cpf: {
+        identifier: 'cpf',
+        rules: [{
+          type: 'empty',
+          prompt: 'CPF é obrigatório.'
+        }]
+      },
+      phone: {
+        identifier: 'phone_number',
+        rules: [{
+          type: 'empty',
+          prompt: 'Telefone com DDD é necessário'
+        }]
+      },
+      street: {
+        identifier: 'address.street',
+        rules: [{
+          type: 'empty',
+          prompt: 'Rua, número e complemento são necessários'
+        }]
+      },
+      city: {
+        identifier: 'address.city',
+        rules: [{
+          type: 'empty',
+          prompt: 'Cidade é necessária'
+        }]
+      },
+      state: {
+        identifier: 'address.state',
+        rules: [{
+          type: 'empty',
+          prompt: 'Estado é necessário'
+        }]
+      },
+      country: {
+        identifier: 'address.country',
+        rules: [{
+          type: 'empty',
+          prompt: 'País é necessário'
         }]
       },
       checkbox_terms: {
         identifier: 'terms',
         rules: [{
           type: 'checked',
-          prompt: 'Please check the checkbox'
+          prompt: 'É necessário aceitar os termos'
         }]
       }
-    }, {
+    }
+    , {
       inline: true,
       onFailure: function () {
-        alert('failure');
+        var $container = $("html,body");
+        var $scrollTo = $('.prompt');
+        $container.animate({scrollTop: $scrollTo.offset().top - $container.offset().top -200, scrollLeft: 0});
         return false;
       },
       onSuccess: function () {
-        alert('success');
+        {{!--alert('success');--}}
       }
-    });
+    }
+    );
   }) 
 </script>
