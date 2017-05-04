@@ -29,7 +29,7 @@ router.use( function( req, res, next ) {
 
 // create action
 router.post('/', (req, res, next) => {
-  var userParams = _.pick(req.body, ['email', 'password', 'full_name', 'cpf', 'nickname', 'facebook_url', 'phone_number', 'work_field', 'creci', 'crea', 'address.street', 'address.zip', 'address.city', 'address.state', 'address.country', 'bank_account.bank', 'bank_account.branch', 'bank_account.account_number', 'iban', 'source'])
+  var userParams = _.pick(req.body, ['email', 'password', 'full_name', 'cpf', 'nickname', 'facebook_url', 'phone_number', 'work_field', 'creci', 'crea', 'address.street', 'address.zip', 'address.city', 'address.state', 'address.country', 'bank_account.bank', 'bank_account.branch', 'bank_account.account_number', 'iban', 'source'])  
   userParams.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   User
     .emailInUse(userParams.email)
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
       res.redirect(303, '/register')
     })
     .then(validEmail => {
-      var user = new User(userParams)      
+      var user = new User(userParams)            
       user
         .save()
         .then(()=>{          
@@ -313,9 +313,8 @@ router.delete('/:id', authenticate, function(req, res, next) {
 });
 
 // edit form
-router.get('/:id/edit', authenticate, function(req, res, next) {  
-  res.render('users/edit', { user: req.user, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})
-  console.log(req.user)  
+router.get('/:id/edit', authenticate, function(req, res, next) {   
+  res.render('users/edit', { user: req.user, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})    
 });
 
 // // show content
@@ -326,20 +325,35 @@ router.get('/:id/edit', authenticate, function(req, res, next) {
 // update action
 router.post('/:id', authenticate, function(req, res, next) {
     if(req.params.id  === req.user._id.toString()){
+    var userParams = _.pick(req.body, ['email', 'full_name', 'nickname', 'facebook_url', 'phone_number', 'work_field', 'creci', 'crea', 'address.street', 'address.zip', 'address.city', 'address.state', 'address.country', 'bank_account.bank', 'bank_account.branch', 'bank_account.account_number', 'iban'])  
     User
       .findOne({
       _id: req.user._id,
       accessToken: req.session.token
       })
       .then(user=>{
-      user.email = req.user.email
+      user.email = req.body.email
       user.full_name = req.body.full_name
+      user.nickname = req.body.nickname
+      user.facebook_url = req.body.facebook_url
+      user.phone_number = req.body.phone_number
+      user.work_field = req.body.work_field
+      user.creci = req.body.creci
+      user.crea = req.body.crea 
+      user.address.city = userParams['address.city']
+      user.address.street = userParams['address.street']
+      user.address.state = userParams['address.state']
+      user.address.country = userParams['address.country']
+      user.bank_account.bank = userParams['bank_account.bank']
+      user.bank_account.branch = userParams['bank_account.branch']
+      user.bank_account.account_number = userParams['bank_account.account_number']
+      user.iban = req.body.iban    
       user.save().then(()=>{
         req.flash('success', 'Dados foram atualizados.')
         res.redirect('/broker')
       })
       .catch(e=>{
-        req.flash('error', e)
+        req.flash('error', 'e')
         res.locals.messages = req.flash
         res.render('users/edit', {user: req.body, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})
       })      

@@ -3,11 +3,11 @@ var hbs = require('nodemailer-express-handlebars');
 var options = {
     viewEngine: {
         extname: '.hbs',
-        layoutsDir: __dirname + 'views/email/',
-        defaultLayout : __dirname + 'template',
-        partialsDir : __dirname + 'views/partials/'
+        layoutsDir: 'views/email/',
+        defaultLayout : 'template',
+        partialsDir : 'views/partials/'
     },
-    viewPath: __dirname + 'views/email/',
+    viewPath: 'views/email/',
     extName: '.hbs'
 };
 var sgTransport = require('nodemailer-sendgrid-transport');
