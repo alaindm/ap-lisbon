@@ -3,11 +3,11 @@ var hbs = require('nodemailer-express-handlebars');
 var options = {
     viewEngine: {
         extname: '.hbs',
-        layoutsDir: 'views/email/',
-        defaultLayout : 'template',
-        partialsDir : 'views/partials/'
+        layoutsDir: __dirname + 'views/email/',
+        defaultLayout : __dirname + 'template',
+        partialsDir : __dirname + 'views/partials/'
     },
-    viewPath: 'views/email/',
+    viewPath: __dirname + 'views/email/',
     extName: '.hbs'
 };
 var sgTransport = require('nodemailer-sendgrid-transport');
@@ -23,13 +23,12 @@ var emailSend = function(to, subject, template, variables){
     var mailer = nodemailer.createTransport(sgTransport(send_grid));
     mailer.use('compile', hbs(options));
     mailer.sendMail({
-        from: 'goldenvisa@example.com',
+        from: 'info@apartamentosemlisboa.com',
         to: to,
         subject: subject,
         template: template,
         context: variables
-    }, function (error, response) {
-        console.log('mail sent');
+    }, function (error, response) {        
         console.log(response)
         console.log(error)
         mailer.close();

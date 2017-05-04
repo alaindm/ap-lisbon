@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const _ = require('lodash')
-var emailSend = require('../mailer')
 var {authenticate} = require('../middleware/authenticate');
 var {Customer} = require('../models/customers');
 const {ObjectID} = require('mongodb');
