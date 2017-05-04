@@ -33,6 +33,10 @@ router.post('/', (req, res, next) => {
   userParams.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   User
     .emailInUse(userParams.email)
+    .catch(emailAlreadyRegistered => {
+      req.flash('error', 'E-mail já registrado.')
+      res.redirect(303, '/register')
+    })
     .then(validEmail => {
       var user = new User(userParams)      
       user
@@ -41,7 +45,7 @@ router.post('/', (req, res, next) => {
           return user.generatePasswordToken()
         })
         .then(regToken => {          
-          emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: userParams.full_name})       
+          emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: user.full_name})   
           res.redirect(303, '/u/gotoemail')   
         })
         .catch(errors => {          
@@ -53,17 +57,11 @@ router.post('/', (req, res, next) => {
             res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source })                                
           } else {
             req.flash('error', 'Erro no formulário. Revise seus dados.')
-            res.locals.messages = req.flash()
-            console.log(errors)
-            console.log(req.body)
+            res.locals.messages = req.flash()            
             res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
           }          
         })
-    })
-    .catch(emailAlreadyRegistered => {
-      req.flash('error', 'E-mail já registrado.')
-      res.redirect(303, '/register')
-    })   
+    })       
 });
 
 // Password recovery
@@ -180,8 +178,13 @@ router.post('/recovery', function(req, res){
       user
         .generatePasswordToken()
         .then(token => {
-          emailSend(req.body.email, "Golden Visa - Password Reset request", 'passwordRecovery', {token: token, firstName: user.full_name})              
+          emailSend(req.body.email, "Apartamento Em Lisboa", 'passwordRecovery', {token: token, firstName: user.full_name})              
           res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
+        })
+        .catch(e => {
+          console.log(e)
+          req.flash('error', 'Usuário não encontrado.')
+          res.redirect(303, '/login')
         })
     })
     .catch(e => {

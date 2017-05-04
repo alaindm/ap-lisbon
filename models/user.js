@@ -135,7 +135,7 @@ UserSchema.statics.emailInUse = function (email) {
   var User = this
   return User
           .findOne({email})
-          .then(user => Promise.reject())
+          .then(user => Promise.reject('E-mail já cadastrado.'))
           .catch(error => Promise.resolve(true))
 }
 
