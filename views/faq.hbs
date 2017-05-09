@@ -1,183 +1,85 @@
 <script>
     $(document)
-    .ready(function() {
-        $('.ui.accordion')
-        .accordion();
-        $('.ui.secondary.pointing.menu .item').tab();
-    });
+        .ready(function () {
+            $('.ui.accordion')
+                .accordion();
+            $('.ui.secondary.pointing.menu .item').tab();
+        });
 </script>
+
 <div class="ui main container">
     <div class="ui container">
-        <h1 class="header"><i class="info circle icon"></i>Investidores - Perguntas Frequentes</h1>
-        <div class="ui divider"></div>
-        <div class="ui pointing secondary menu">
-            <a class="item active" data-tab="1">Geral</a>
-            <a class="item" data-tab="2">Investimento</a>
-            <a class="item" data-tab="3">Jurídico-Financeiro</a>
-        </div>
+        <h1 class="ui form header" style='text-align: center'>Perguntas Frequentes</h1>
+        </br>
 
-        <div class="ui tab active" data-tab="1">
-            <div class="ui styled accordion fluid">
-                <div class="title"><i class="dropdown icon"></i>O que é o Imobank e como funciona?</div>
-                <div class="content">
-                    <p>Somos uma plataforma de investimento coletivo (crowdfunding) especializada em construção civil. Nosso
-                        objetivo é oferecer a toda comunidade de investidores a oportunidade de investir em projetos imobiliários
-                        pré-selecionados. </p>
-                    <p>Estes tipos de projetos demandam alto valor total investido e acabam sendo realizado normalmente por
-                        grandes investidores, porém através do crowdfunding é possível que pequenos investidores tenham acesso
-                        às oportunidades de ganhos que têm os empreendedores.</p>
-                    <p>Os empreendedores têm mais acesso a capital e podem fazer mais e melhor.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Como começo a investir pelo Imobank?</div>
-                <div class="content">
-                    <p>Para investir faça seu cadastro no website do Imobank e escolha entre os projetos disponíveis. Faça a
-                        reserva de investimento no valor escolhido e receba a indicação da conta específica para transferir
-                        o investimento.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quem pode investir?</div>
-                <div class="content">
-                    <p>Pessoas físicas com registro no CPF e maiores de 18 anos e pessoas jurídicas estabelicidadas no Brasil.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>O Imobank verifica o histórico dos desenvolvedores?</div>
-                <div class="content">
-                    <p>Sim. O histórico de projetos já realizados é importante, além disso os desenvolvedores imobiliários apresentam
-                        diversos documentos, certidões e detalhes sobre o projeto antes de iniciar uma captação. Aspectos
-                        criminais, financeiros, jurídicos e mercadológicos são considerados nesta filtragem. </p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Existem taxas para o investidor?</div>
-                <div class="content">
-                    <p>Não. O investidor deve transferir somente o valor financeiro que deseja investir. A taxa do serviço da
-                        plataforma é paga pelo empreendedor que está captando os recursos.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>O que acontece se o Imobank deixar de existir?</div>
-                <div class="content">
-                    <p>No remoto caso da plataforma deixar de operar, o seu investimento não será afetado. A única alteração
-                        seria que o empreendedor deverá enviar os relatórios períodicos diretamente ao investidor. O Imobank
-                        somente é resposável por organizar a captação "crowdfunding" e disponibilizar os relatórios no seu
-                        website.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>De onde vem o lucro do investimento?</div>
-                <div class="content">
-                    <p>A atividade empresarial do empreendedor visa gerar lucro e o investimento realizado pelo investidor confere
-                        participação nos lucros deste projeto de investimento. Imobank é a única plataforma na qual o invertidor
-                        tem a mesma margem do empreendedor imobiliário.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Como posso monitorar o Investimento?</div>
-                <div class="content">
-                    <p>Ao realizar a captação "crowdfunding" o empreendedor enviará periodicamente relatórios com informações
-                        financeiras e de andamento do projeto ao investidor por meio da plataforma Imobank na página "Meus
-                        Investimentos". </p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Como o Imobank ganha pelo serviço?</div>
-                <div class="content">
-                    <p>O Imobank recebe uma taxa percentual sobre o valor captado dos investidores. Este serviço é pago pelo
-                        Desenvolvedor que recebe a captação.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quais são as vantagens de se investir com o Crowdfunding (Investimento Coletivo)?</div>
-                <div class="content">
-                    <p>Através do crowdfunding um investidor pode com uma pequena quantia investir em projetos que normalmente
-                        são oferecidos somente aos investidores de grande capital. Essa modalidade de investimento também
-                        torna possível que a comunidade que vive próxima ao local do projeto possa participar dos lucros
-                        da operação.</p>
-                    <p>Diferente de outros modelos e plataformas, A Imobank possibilita um pequeno investimento ser remunerado
-                        comos mesmos ganhos do empreendedor imobiliário.
-                        <p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quais são os critérios para seleção de projetos e desenvolvedores?</div>
-                <div class="content">
-                    <p>Esta é uma pergunta relevante, queremos que 100% dos projetos ofertados alcancem incrível sucesso. Para
-                        tal analisamos além do histórico e perfil do desenvolvedor, aspectos e pareceres jurídicos do imóvel,
-                        qualidade e detalhamento do projeto, solidez da projeção financeira e mercadológica, entre outros.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Posso investir fora da plataforma?</div>
-                <div class="content">
-                    <p>Todo o procedimento de investimento é online. Nenhuma outra forma de investimento através de estabelecimentos
-                        físicos e contratos "offline" (em papel) é realizada. Caso o investidor encontre dificuldade com
-                        nosso procedimento online, pode socilicitar ajuda por e-mail ou telefone.</p>
-                </div>
+        <div class="ui styled accordion fluid" style='max-width: 600px; margin: auto'>
+            <div class="title"><i class="dropdown icon"></i>Quem pode ser parceiro?</div>
+            <div class="content">
+                <p>A plataforma destina-se à qualquer consultor que tenha clientes qualificados para comprar em Portugal. Pode
+                    ser de qualquer área desde que preencha os dados do formulário de adesão e adira ao contrato de parceria.</p>
+                    <p>Exemplos: Advogados, arquitetos, corretores, imobiliárias, engenheiros, construtores, economistas, etc. A plataforma
+                    aceita pessoas físicas e jurídicas. Fique atento às condições e documentos para para o recebimento das
+                    comissões.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Qual a garantia de pagto por indicar um potencial cliente?</div>
+            <div class="content">
+                <p>A garantia é o contrato de parceria entre o Parceiro e o maior grupo de intermediação de Portugal. No contrato
+                    constam valores e condições.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Quem faz a gestão do processo de compra?</div>
+            <div class="content">
+                <p>Toda a gestão desde apresentação das oportunidades até os contratos e escrituras são todos geridos pela empresa
+                    intermediadora qualificada no contrato de parceria.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Há custos para o corretor no Brasil?</div>
+            <div class="content">
+                <p>Não há qualquer custo ou mensalidade para aderir à parceria. Eventualmente pode haver custos com autenticação
+                    de suas assinaturas caso um contrato físico ou aditamento se faça necessário, ou envio de alguma correspondêcia.
+                    E claro, cada qual pague seus impostos sobre comissões.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Posso receber a comissão em quais países?</div>
+            <div class="content">
+                <p>Pode receber em qualquer país desde que sua conta e IBAN estejam corretamente preenchidos no cadastro e/ou
+                    contrato.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Quais condições para o pagamento das comissões?</div>
+            <div class="content">
+                <p>O primeiro é que seu cliente efetivamente compre com a intermediadora qualificada. Para receber será necessária
+                    a emissão de documento fiscal eletrônico em nome do parceiro, e guia do país para evitar dupla tributação.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Quem coordena os processos quando o cliente quer Golden Visa?</div>
+            <div class="content">
+                <p>A intermediadora faz toda a gestão nos casos de golden visa, temos profissionais e um departamento de processos
+                    habituados com a prática. Acessoria complementar custa ao cliente de 6.000 à 10.000 Euros, pagos por
+                    ele.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Qual prazo de pagto das comissões?</div>
+            <div class="content">
+                <p>As comissões ficam disponíveis 15 dias úteis após a efetivação do negócio. O parceiro será comunicado da
+                    disponibilidade para emissão de sua NF.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>Meu cliente tem interesse, mas é o Advogado dele que cuida dos investimentos. Devo
+                cadastrar o Advogado também?</div>
+            <div class="content">
+                <p>Não, o cadastro da indicação deve ser somente do seu cliete qualificado como interessado. Estamos habituados
+                    ao atendimento “de Advogado para Advogado” e nosso jurídico acompanhará de perto. Indique no campo de
+                    observações os nomes de contatos ou representantes, ou ainda assistentes que possam facilitar o contato.</p>
+            </div>
+            <div class="title"><i class="dropdown icon"></i>É preciso ter o CRECI?</div>
+            <div class="content">
+                <p>Não, não existe esse tipo de órgão em Portugal e estamos trabalhando com consultores plurais.</p>
             </div>
         </div>
 
-        <div class="ui tab" data-tab="2">
-            <div class="ui styled accordion fluid">
-                <div class="title"><i class="dropdown icon"></i>Quais são os benefícios de se investir via Imobank?</div>
-                <div class="content">
-                    <p>Simplicidade no procedimento, transparência de informações, projetos imobiliários pré-selecionados e
-                        o acesso a investimentos de grande porte com quantias menores.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Qual é o valor mínimo para investir?</div>
-                <div class="content">
-                    <p>R$ 1.000,00 (Mil Reais)</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Como funciona a transferência dos recursos?</div>
-                <div class="content">
-                    <p>O investidor deverá realizar uma TED para uma conta bloqueada do empreendedor. O empreendedor somente
-                        poderá retirar os recursos da conta após o término da captação e aval do Imobank.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quando receberei meu investimento de volta?</div>
-                <div class="content">
-                    <p>Cada investimento tem um prazo estimado de retorno. O investidor deve analisar os detalhes de cada projeto
-                        e escolher o que tem um prazo de acordo com suas expectativas. Existe o risco de projeto atrasar
-                        e o retorno não ocorrer no prazo estimado.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quanto tempo devo esperar para obter o retorno do investimento?</div>
-                <div class="content">
-                    <p>Projetos imobiliários tem prazo de retorno entre 12 a 48 meses. Verifique os detalhes de cada projeto
-                        antes de investir.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Posso receber o retorno antes do prazo estimado?</div>
-                <div class="content">
-                    <p>Caso o projeto seja concluído antes do prazo estimado, o investidor receberá o retorno o quanto antes.
-                        Porém, se o investidor precisar do valor investido antes do prazo de retorno, terá que vender seu
-                        título. Esta operação não é realizada com intermédio do Imobank e deve seguir as regras descritas
-                        no seu certificado.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>O que estou adquirindo ao investir?</div>
-                <div class="content">
-                    <p>O investidor recebe um Certificado de Investimento Coletivo que confere participação nos lucros do empreendimento.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quando e como receberei o certificado de investimento?</div>
-                <div class="content">
-                    <p>Em até 30 dias após a conclusão da captação o Investidor receberá por e-mail (disponibilizado também
-                        no website do Imobank) o certificado assinado digitalmente pelo empreendedor.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="ui tab" data-tab="3">
-            <div class="ui styled accordion fluid">
-                <div class="title"><i class="dropdown icon"></i>Existe risco ao investir?</div>
-                <div class="content">
-                    <p>Sim. Empreendimentos imobiliários tem alto risco devido a sua complexidade. O investidor deve ler atentamente
-                        todos os detalhes da oferta de investimento, incluindo a sessão de riscos associados ao projeto e
-                        ao empreendedor.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Quais impostos incidem sobre o investimento?</div>
-                <div class="content">
-                    <p>Cada investidor deverá incluir os valores recebidos como retorno do investimento em sua declaração à
-                        Receita Federal e pagar os imposto de acordo com o seu rendimento e prazo.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>Como é calculado o retorno do investimento?</div>
-                <div class="content">
-                    <p>O empreendedor que realiza a captação deverá operar no regime de lucro presumido visando facilitar a
-                        apuração do lucro do empreendimento.</p>
-                </div>
-                <div class="title"><i class="dropdown icon"></i>A transferência dos recursos (TED) é segura?</div>
-                <div class="content">
-                    <p>Sim. A transferência é diretamente para a conta do empreendedor indicada pelo Imobank no momento da reserva
-                        de investimento. Esta conta é bloqueada até que a operação de captação seja concluída.</p>
-                </div>
-            </div>
-        </div>
 
         <br>
-        <div class="ui message floating">
+        <div class="ui message floating form">
             <div class="header">
                 Outras dúvidas?
             </div>
-            <p>Entre em contato via e-mail: <strong>info@dominio.com</strong></p>
+            <p>Entre em contato via e-mail: <strong>info@apartamentosemlisboa.com</strong></p>
         </div>
-        
+
     </div>
 
 </div>

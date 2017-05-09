@@ -86,7 +86,8 @@ router.post('/login', function(req, res, next) {
                   req.session.li = true // logged in
                   res.redirect(303,'/broker')
                 })
-                .catch(e => {                  
+                .catch(e => { 
+                  console.log(e)                 
                   req.flash('error', 'Erro do servidor.')                  
                   res.redirect(303,'/')
                 })
