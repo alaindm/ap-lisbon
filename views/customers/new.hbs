@@ -29,7 +29,7 @@
       <input type="number" name="phone_number1" placeholder="(11) 5012-3456" value='{{customer.phone_number1}}'>
     </div>
 
-    <div class="field">
+    <div class="field required">
       <label>Telefone Celular (com DDD)</label>
       <input type="number" name="phone_number2" placeholder="(11) 91234-5678" value='{{customer.phone_number2}}'>
     </div>
@@ -119,23 +119,23 @@
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" name="golden_visa" value='{{customer.golden_visa}}'>
-        <label>Interesse no "Golden Visa"</label>
+        <label>Este cliente tem interesse no Golden Visa</label>
       </div>
     </div>
 
     <div class="field">
       <label>Cidades de interesse</label>
-      <input type="text" name="city_of_interest" placeholder="Lisboa, Porto, etc." value='{{customer.city_of_interest}}'>
+      <input type="text" name="city_of_interest" placeholder="Lisboa, Porto, Algarve, Setúbal ..." value='{{customer.city_of_interest}}'>
     </div>
 
     <div class="field">
       <label>Perfil de Investimento</label>
-      <input type="text" name="investment_profile" placeholder="Moradia pŕopria, investimento longo prazo, etc." value='{{customer.investment_profile}}'>
+      <input type="text" name="investment_profile" placeholder="Moradia pŕopria, locação turística, para reforma, investimento longo prazo, etc." value='{{customer.investment_profile}}'>
     </div>
 
     <div class="field">
       <label>Tipo de imóvel que tem interesse</label>
-      <input type="text" name="property_type" placeholder="apartamento..." value='{{customer.property_type}}'>
+      <input type="text" name="property_type" placeholder="Apartamento, Casas, Hotéis, Terrenos ..." value='{{customer.property_type}}'>
     </div>
 
     <div class="field">
@@ -146,7 +146,7 @@
     </div>
 
     <div class="field">
-      <label>Valor disponível no ato ("Entrada") em Reais (R$)</label>
+      <label>Valor disponível no ato ("Entrada") em Euros (EUR)</label>
       <input type="number" name="amount_available" placeholder="Valor" value='{{customer.amount_available}}'>
     </div>
     
@@ -194,6 +194,13 @@
         rules: [{
           type: 'empty',
           prompt: 'Insira seu nome completo'
+        }]
+      },
+      phone_number2: {
+        identifier: 'phone_number2',
+        rules: [{
+          type: 'empty',
+          prompt: 'Telefone Celular é obrigatório'
         }]
       },
       cpf: {

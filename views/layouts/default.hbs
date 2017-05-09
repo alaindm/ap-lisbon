@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content='{{desc}}'>
   <META NAME="ROBOTS" CONTENT='{{robots}}'>
- 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,20 +23,16 @@
   <!-- Application core CSS -->
   <link rel='stylesheet' href='/stylesheets/style.css' />
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
 
   <script>
     window.jQuery || document.write('<script src="/javascripts/jquery.min.js"><\/script>')
   </script>
 
-
-
   <!-- Custom styles for this template -->
   {{#each css}}
   <link rel="stylesheet" href="/stylesheets/{{this}}" /> {{/each}}
-
-
 
 </head>
 
@@ -45,117 +40,121 @@
 
   <div class="ui vertical sidebar menu left">
     <a href='/' class="header">
-      <i class="center aligned huge home icon"></i>
+      <i class="center aligned huge black home icon" style='display: inline-block; width: 100%'></i>
     </a>
-    {{!--<a href='/' class='header item'>IMAGEM DO LOGO</a>--}}
-      <div class="ui item">
-            <div class="ui fluid dropdown">Como funciona?<i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class='item' href='/como-funciona'>O Modelo de Negócio</a>
-                    <a class='item' href='/faq'>Perguntas frequentes</a>                     
-                </div>
-            </div>
+    {{#if isLoggedIn}}
+    <div class="ui item">
+      <div class="ui fluid dropdown">Como funciona?<i class="dropdown icon"></i>
+        <div class="menu">
+          <a class='item' href='/como-funciona'>O Modelo de Negócio</a>
+          <a class='item' href='/faq'>Perguntas frequentes</a>
         </div>
+      </div>
+    </div>
 
-        <div class="ui item">
-            <div class="ui fluid dropdown">Jurídico<i class="dropdown icon"></i>
-                <div class="menu">
-                  <a class='item' href='/about'>Quem Somos</a>
-                  <a class='item' href='#'>Contrato de Parceria</a>
-                    <a class='item' href='/tos'>Termos de Uso</a>
-                    <a class='item' href='/pp'>Política de Privaciade</a>                     
-                </div>
-            </div>
-        </div>
-      {{#if isLoggedIn}}
-      
-        <script>
-          $(document)
-            .ready(function () {
-              $('.ui.sidebar')
-                .sidebar('attach events', '.toc.item');
-              $('.ui.dropdown')
-                .dropdown();
-            });
-        </script>
-        <div class="ui item">
-            <div class="ui fluid dropdown">Apoio ao Corretor<i class="dropdown icon"></i>
-                <div class="menu">
-                  <a class='item' href='#'>Links Úteis</a>
-                  <a class='item' href='#'>Material de Suporte</a>                                    
-                </div>
-            </div>
-        </div>
-      <a href='/customers/new' class='item ui black tiny header'>Cadastrar Novo Cliente<a>
-        <div  id="broker-menu-button" class="ui gray buttons">
-          <div class="ui fluid button"><a href='/broker'><i class="user icon"></i>Menu do Corretor</a></div>
-          <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
-            <div class="menu">  
-              <a href='/broker' class='item'>Painel de Controle</a>
-              <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
-              <a href='/u/logout' class='item'>Sair</a>           
-            </div>
-          </div>
+    <div class="ui item">
+      <div class="ui fluid dropdown">Jurídico<i class="dropdown icon"></i>
+        <div class="menu">
+          <a class='item' href='/about'>Quem Somos</a>
+          <a class='item' href='#'>Contrato de Parceria</a>
+          <a class='item' href='/tos'>Termos de Uso</a>
+          <a class='item' href='/pp'>Política de Privaciade</a>
         </div>
       </div>
-      {{else}}
-      {{!--<div class="item">        
-          <a href='/login' class='ui fluid button'>Entrar</a>          
-      </div>
-      <div class="item"> 
-          <a href='/register' class='ui fluid positive button'>Registrar-se</a>  
-      </div>      
-      </div>--}}
-            <div class="item">        
-          <a href='/login' class='ui fluid button positive'>Entrar</a>          
-      </div>          
-      </div>
-      {{/if}}
-
-  </div> 
+    </div>
     
+    
+
+    <script>
+      $(document)
+        .ready(function () {
+          $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item');
+          $('.ui.dropdown')
+            .dropdown();
+        });
+    </script>
+
+    <div class="ui item">
+      <div class="ui fluid dropdown">Apoio ao Parceiro<i class="dropdown icon"></i>
+        <div class="menu">
+          <a class='item' href='/links'>Links Úteis</a>
+          <a class='item' href='#'>Material de Suporte</a>
+        </div>
+      </div>
+    </div>
+
+    <a href='/customers/new' class='item ui black tiny header'>Cadastrar Novo Cliente<a>
+    <div  id="broker-menu-button" class="ui gray buttons">
+    <a href='/broker'><div class="ui fluid button" ><i class="user icon"></i>Menu do Parceiro</div></a>
+    <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
+    <div class="menu">
+      <a href='/broker' class='item'>Painel de Controle</a>
+      <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
+      <a href='/u/logout' class='item'>Sair</a>
+    </div>
+  </div>
+  </div>
+  </div>
+  {{else}} {{!--
+  <div class="item">
+    <a href='/login' class='ui fluid button'>Entrar</a>
+  </div>
+  <div class="item">
+    <a href='/register' class='ui fluid positive button'>Registrar-se</a>
+  </div>
+  </div>--}}
+  <div class="item">
+    <a href='/login' class='ui fluid button positive'>Entrar</a>
+  </div>
+  </div>
+  {{/if}}
+
+  </div>
+
   <div class="ui fixed menu">
     <div class="ui container">
-      <a class="toc item mobile only"><i class="sidebar big icon"></i></a>      
+      <a class="toc item mobile only"><i class="sidebar big icon"></i></a>
       <script>
         $(document)
           .ready(function () {
             $('.ui.sidebar')
               .sidebar('attach events', '.toc.item');
             $('.ui.dropdown')
-              .dropdown()           
+              .dropdown()
           });
       </script>
       <a href='/' class='header item'><img src='/images/aplisboa.png' alt='logo do apartamentosemlisboa.com' style='width: 12em'></a>
-      <div class="ui item">
-            <div class="ui fluid dropdown mobile hidden">Como funciona?<i class="dropdown icon"></i>
-                <div class="menu">
-                    <a class='item' href='/como-funciona'>O Modelo de Negócio</a>
-                    <a class='item' href='/faq'>Perguntas frequentes</a>                     
-                </div>
-            </div>
-        </div>
-
-        <div class="ui item mobile hidden">
-            <div class="ui fluid dropdown">Jurídico<i class="dropdown icon"></i>
-                <div class="menu">
-                  <a class='item' href='/about'>Quem Somos</a>
-                  <a class='item' href='#'>Contrato de Parceria</a>
-                    <a class='item' href='/tos'>Termos de Uso</a>
-                    <a class='item' href='/pp'>Política de Privaciade</a>                     
-                </div>
-            </div>
-        </div>  
       {{#if isLoggedIn}}
       <div class="ui item mobile hidden">
-            <div class="ui fluid dropdown">Apoio ao Corretor<i class="dropdown icon"></i>
-                <div class="menu">
-                  <a class='item' href='#'>Links Úteis</a>
-                  <a class='item' href='#'>Material de Suporte</a>                                    
-                </div>
-            </div>
+        <div class="ui fluid dropdown">Jurídico<i class="dropdown icon"></i>
+          <div class="menu">
+            <a class='item' href='/tos'>Termos de Uso</a>
+            <a class='item' href='/pp'>Política de Privaciade</a>
+          </div>
         </div>
-      <a href='/customers/new' class='item ui black tiny header mobile hidden'>Cadastrar Novo Cliente<a>
+      </div>
+      
+      <div class="ui item mobile hidden">
+        <div class="ui fluid dropdown ">Como funciona?<i class="dropdown icon"></i>
+          <div class="menu">
+            <a class='item' href='/como-funciona'>O Modelo de Negócio</a>
+            <a class='item' href='/faq'>Perguntas frequentes</a>
+          </div>
+        </div>
+      </div>
+
+      <a href='/about' class='item ui black tiny header mobile hidden'>Quem Somos</a>
+      
+      <div class="ui item mobile hidden">
+        <div class="ui fluid dropdown">Apoio ao Parceiro<i class="dropdown icon"></i>
+          <div class="menu">
+            <a class='item' href='/links'>Links Úteis</a>
+            <a class='item' href='#'>Material de Suporte</a>
+          </div>
+        </div>
+      </div>
+      <a href='/customers/new' class='item ui black tiny header mobile hidden'>Cadastrar Novo Cliente</a>
       <div class="right item">
         <script>
           $(document)
@@ -169,71 +168,36 @@
         <a href='#' class='item ui black tiny header'><a>
         
         <div class="ui gray buttons monitor only">
-          <div class="ui button"><a href='/broker'><i class="user icon"></i>Menu do Corretor</a></div>
-          <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
-            <div class="menu">  
-              <a href='/broker' class='item'>Painel de Controle</a>
-              <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
-              <a href='/u/logout' class='item'>Sair</a>
-            </div>
-          </div>
+          <a href='/broker'><div class="ui button"><i class="user icon"></i>Menu do Parceiro</div></a>
+      <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
+        <div class="menu">
+          <a href='/broker' class='item'>Painel de Controle</a>
+          <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
+          <a href='/u/logout' class='item'>Sair</a>
         </div>
       </div>
-      {{else}}
-      {{!--<div class="right item monitor only">
-        <div class="ui buttons">
-          <a href='/login' class='ui button'>Entrar</a>
-          <div class="or" data-text="ou"></div>
-          <a href='/register' class='ui positive button'>Registrar-se</a>
-        </div>
-      </div>--}}
-      <div class="right item monitor only">
-      <div class="ui buttons">
-          <a href='/login' class='ui button positive'>Entrar</a>          
-        </div>
-      </div>
-      {{/if}}
     </div>
   </div>
-
-<div id='content' class='ui container'>
-  {{> flashMessages }}  
-  
-  {{{body}}}
-</div>
-
-
-
-  {{!--<div id="footer" class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-      <div class="ui stackable inverted divided grid">
-        <div class="five wide column">          
-          <div class="ui inverted link list">
-            <a href='/about' class='item'>Quem somos</a>
-            <a href='/about' class='item'>Links Úteis</a>
-            
-          </div>
-        </div>
-        <div class="five wide column">          
-          <div class="ui inverted link list">
-            <a class="item">Perguntas Frequentes</a>
-            <a href='#' class='item'>Exemplo de Contrato</a>
-          </div>
-        </div>
-        <div class="six wide column">          
-          <div class="ui inverted link list">
-            <a href='/tos' class='item'>Termos de Uso</a>
-            <a href='/pp' class='item'>Política de Privacidade</a>
-            
-          </div>
-        </div>
-
-      </div>
+  {{else}} {{!--
+  <div class="right item monitor only">
+    <div class="ui buttons">
+      <a href='/login' class='ui button'>Entrar</a>
+      <div class="or" data-text="ou"></div>
+      <a href='/register' class='ui positive button'>Registrar-se</a>
     </div>
   </div>--}}
+  <div class="right item monitor only">
+    <div class="ui buttons">
+      <a href='/login' class='ui button positive'>Entrar</a>
+    </div>
+  </div>
+  {{/if}}
+  </div>
+  </div>
 
-
-
+  <div id='content' class='ui container'>
+    {{> flashMessages }} {{{body}}}
+  </div>
 
 
 
@@ -243,28 +207,34 @@
 
   <script src="/semantic/semantic.min.js"></script>
 
-  
+
   <script src="/javascripts/ie10-viewport-bug-workaround.js"></script>
-    <script>
+  <script>
     $(document)
       .ready(function () {
         $('.ui.sidebar')
           .sidebar('attach events', '.toc.item');
         $('.ui.dropdown')
-          .dropdown()        
+          .dropdown()
       });
   </script>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-98310262-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+    ga('create', 'UA-98310262-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 </body>
 

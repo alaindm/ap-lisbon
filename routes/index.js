@@ -5,7 +5,11 @@ var {authenticate} = require('../middleware/authenticate');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Entrar', desc: 'Entrar/Login', robots: 'INDEX, FOLLOW'})
+  if (res.locals.isLoggedIn) {
+    res.render('broker', { title: 'Menu do Parceiro', desc: 'Entrar/Login', robots: 'NOINDEX, NOFOLLOW'})
+  } else {
+    res.render('login', { title: 'Apartamentos em Lisboa - Parceiros', desc: 'Entrar/Login', robots: 'NOINDEX, NOFOLLOW'})
+  }  
 });
 
 // Register new user
@@ -30,23 +34,28 @@ router.get('/tos', function(req, res, next) {
 });
 
 // About or Contact page
-router.get('/about', function(req, res, next) {
+router.get('/about', authenticate, function(req, res, next) {
   res.render('about', { title: 'Quem somos', desc: 'Os responśaveis pelo website', robots: 'NOINDEX, FOLLOW'})
 });
 
 // User(Broker) menu
 router.get('/broker', authenticate, function(req, res, next) {   
-  res.render('broker', {id: (req.user._id), css:['broker.css'], title: 'Menu do Corretor', desc: 'Opções para o corretor', robots: 'NOINDEX, FOLLOW'});
+  res.render('broker', {id: (req.user._id), css:['broker.css'], title: 'Menu do Parceiro', desc: 'Opções para o corretor parceiro', robots: 'NOINDEX, FOLLOW'});
 });
 
 // FAQ 
-router.get('/faq', function(req, res, next) {     
+router.get('/faq', authenticate, function(req, res, next) {     
   res.render('faq', { title: 'Perguntas Frequentes', desc: 'Dúvidas frequentes sobre o Apartamentos em Lisboa', robots: 'INDEX, FOLLOW'})
 })
 
 // Modelo de Negócio
-router.get('/como-funciona', function(req, res, next) {     
+router.get('/como-funciona', authenticate, function(req, res, next) {     
   res.render('como-funciona', { title: 'Como funciona?', desc: 'Como funciona o modelo de negócio do website Apartamentos em Lisboa', robots: 'INDEX, FOLLOW'})
+})
+
+// Links úteis
+router.get('/links', authenticate, function(req, res, next) {     
+  res.render('links', { title: 'Links úteis', desc: 'Links úteis ao corretor parceiros a respeito de imóveis em Portugal', robots: 'INDEX, FOLLOW'})
 })
 
 // Contrato Padrão
