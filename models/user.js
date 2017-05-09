@@ -151,16 +151,18 @@ UserSchema.methods.generatePasswordToken = function () {
 UserSchema.methods.generateAuthToken = function () {
   var user = this
   var token = jwt.sign({id: user._id.toHexString(), type: 'access'}, process.env.JWT_SECRET).toString();
-  user.accessToken = token  
-  return user.save().then(() => {    
+  // user.accessToken = token  
+  // return user.save().then(() => {    
+  return user.update({accessToken: token}).then(() => {   
     return token;
   });
 };
 
 UserSchema.methods.validateAccount = function () {
   var user = this    
-  user.account_validation = 'active'
-  return user.save()
+  // user.account_validation = 'active'
+  // return user.save()
+  return user.update({account_validation: 'active'})
 };
 
 UserSchema.statics.checkExpirationToken = function(receivedToken) {

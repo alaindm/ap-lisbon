@@ -27,7 +27,11 @@ var CustomerSchema = new mongoose.Schema({
     },
     phone_number2: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: (phone_number2) => phone_number2.length > 6,
+            message: 'Telefone Celular é necessário.'
+        }
     },
     email1: {
         type: String,
