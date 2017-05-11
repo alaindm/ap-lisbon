@@ -3,7 +3,9 @@ var router = express.Router()
 const _ = require('lodash')
 var emailSend = require('../mailer')
 var {authenticate} = require('../middleware/authenticate');
+var {adminAuth} = require('../middleware/adminAuth');
 var {User} = require('../models/user');
+var {Customer} = require('../models/customers');
 const {ObjectID} = require('mongodb');
 const handlebars = require('handlebars')
 const fs = require('fs')
@@ -316,6 +318,34 @@ router.delete('/:id', authenticate, function(req, res, next) {
 // edit form
 router.get('/:id/edit', authenticate, function(req, res, next) {   
   res.render('users/edit', { user: req.user, title: 'Editar dados da conta', robots: 'NOINDEX, NOFOLLOW'})    
+});
+
+// view profile (only Admin)
+router.get('/:id', adminAuth, function(req, res, next) {   
+  User
+    .findById(req.params.id)
+    .then(user => {
+      res.render('users/show', { user, title: 'Informações de Parceiro', robots: 'NOINDEX, NOFOLLOW'}) 
+    })
+    .catch(error => {
+      req.flash('error', 'Usuário não encontrado')
+      res.redirect(303, '/admin')
+    })     
+});
+
+// customer list per user (for admins)
+router.get('/:id/customers', adminAuth, function(req, res, next) {
+  Customer
+    .find({_creator: req.params.id}, 'full_name')
+    .sort('full_name')
+    .then(customers => {
+      // res.send(customers)
+      res.render('customers/index-admin', {title: 'Clientes cadastrados', customers});
+    })
+    .catch(error => {
+      req.flash('error', 'Erro interno')
+      res.redirect(303, '/admin')
+    }) 
 });
 
 // // show content

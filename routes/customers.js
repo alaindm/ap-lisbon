@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const _ = require('lodash')
 var {authenticate} = require('../middleware/authenticate');
+var {adminAuth} = require('../middleware/adminAuth');
 var {Customer} = require('../models/customers');
 const {ObjectID} = require('mongodb');
 
@@ -19,6 +20,7 @@ router.get('/', authenticate, function(req, res, next) {
       res.redirect(303, '/brokers')
     }) 
 });
+
 
 // create form
 router.get('/new', authenticate, function(req, res) {  
@@ -80,6 +82,21 @@ router.get('/:id', authenticate, function(req, res, next) {
       console.log(error)
       req.flash('error', 'Usuário não existe')
       res.redirect(303, '/broker')
+    })
+});
+
+// show content by user (for admins)
+router.get('/:id/admin', adminAuth, function(req, res, next) {    
+  var customerId = req.params.id
+  Customer
+    .findOne({_id: customerId})
+    .then(customer => {      
+        res.render('customers/show', {title: `Informações de ${customer.full_name}`, customer})      
+    })
+    .catch(error => {
+      console.log(error)
+      req.flash('error', 'Usuário não existe')
+      res.redirect(303, '/admin')
     })
 });
 

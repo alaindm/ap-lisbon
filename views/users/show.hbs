@@ -1,0 +1,187 @@
+<style type="text/css">
+  .ui .form {
+    max-width: 600px;
+    margin: auto;
+  }
+</style>
+
+<div class='ui form'>
+
+  <h2 class="ui blue header">{{user.full_name}}</h2>
+  <a href='/u/{{user._id}}/customers'>
+    <button class="ui primary button">Ver clientes cadastrados por este parceiro</button>
+    </a>
+
+  <div class="ui list">
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">C.P.F.</div>
+        <div class="description">{{user.cpf}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Status da Conta</div>
+        <div class="description">{{user.account_validation}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Telefone</div>
+        <div class="description">{{user.phone_number}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Apelido</div>
+        <div class="description">{{user.nickname}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">E-mail</div>
+        <div class="description">{{user.email}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Facebook</div>
+        <div class="description">{{user.facebook_url}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Área de Trabalho</div>
+        <div class="description">{{user.work_field}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">CRECI</div>
+        <div class="description">{{user.creci}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">CREA</div>
+        <div class="description">{{user.crea}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Endereço completo</div>
+        <div class="description">{{user.address.street}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Cidade</div>
+        <div class="description">{{user.address.city}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Estado</div>
+        <div class="description">{{user.address.state}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">País</div>
+        <div class="description">{{user.address.country}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Banco</div>
+        <div class="description">{{user.bank_account.bank}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Agencia</div>
+        <div class="description">{{user.bank_account.branch}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Conta</div>
+        <div class="description">{{user.bank_account.account_number}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Área de trabalho / Profissão</div>
+        <div class="description">{{user.work_field}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">IBAN</div>
+        <div class="description">{{user.iban}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Fonte</div>
+        <div class="description">{{user.source}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">Deletado? (Se constar e-mail, é porque a conta foi deletada pelo usuário)</div>
+        <div class="description">{{user.email_deleted}}</div>
+      </div>
+    </a>
+
+    <a class="item">
+      <i class="right triangle icon"></i>
+      <div class="content">
+        <div class="header">É administrador deste site?</div>
+        <div class="description">{{user.isAdmin}}</div>
+      </div>
+    </a>
+
+  </div>
+
+</div>

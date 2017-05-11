@@ -8,10 +8,10 @@ var hbs = require('express-handlebars')
 var flash = require('connect-flash');
 require('./config/config');
 var {mongoose} = require('./db/mongoose');
-var {User} = require('./models/user');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var customers = require('./routes/customers');
+var admin = require('./routes/admin');
 
 
 var app = express();
@@ -56,6 +56,7 @@ app.use(function(req, res, next) {
 app.use('/', index)
 app.use('/u', users)
 app.use('/customers', customers)
+app.use('/admin', admin)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

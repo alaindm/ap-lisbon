@@ -121,6 +121,9 @@ var UserSchema = new mongoose.Schema({
   },
   email_deleted: {
     type: String
+  },
+  isAdmin: {
+    type: Boolean
   }
 });
 

@@ -1,0 +1,17 @@
+<h3> Lista de Parceiros Cadastrados</h3>
+<h5>Inclui adminsitradores do website</h5>
+</br>
+
+<div class="ui middle aligned divided list">
+    {{#each user}}
+  <div class="item">
+    <div class="right floated content">
+      <a href='u/{{_id}}'><div class="ui tiny button">+ Detalhes</div></a>
+    </div>
+    <i class='icon user'></i>
+    <div class="content">
+      {{full_name}}
+    </div>
+  </div>  
+   {{/each}}
+</div>
