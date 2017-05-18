@@ -21,8 +21,8 @@
     </div>
 
     <div class="field required">
-      <label>Nome Completo</label>
-      <input type="text" name="full_name" placeholder="Nome Completo" value='{{user.full_name}}'>
+      <label>Nome Completo/Razão Social</label>
+      <input type="text" name="full_name" placeholder="Nome Completo ou Razão Social" value='{{user.full_name}}'>
     </div>
 
     <div class="field">
@@ -68,6 +68,11 @@
     <div class="field required">
       <label>Estado</label>
       <input type="text" name="address.state" placeholder="Sigla do Estado" value='{{user.address.state}}'>
+    </div>
+
+    <div class="field required">
+      <label>CEP</label>
+      <input type="text" name="address.zip" placeholder="01234-000" value='{{user.address.zip}}'>
     </div>
 
     <div class="field required">

@@ -49,8 +49,8 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => validator.isLength(v, {min:11, max:11}),
-      message: 'CPF são 11 números.'
+      validator: (v) => validator.isLength(v, {min:11, max:15}),
+      message: 'Informação inválida.'
     }
   },
   nickname: {

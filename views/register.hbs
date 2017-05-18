@@ -31,12 +31,12 @@
     </div>
 
     <div class="field required">
-      <label>Nome Completo</label>
+      <label>Nome Completo ou Razão Social</label>
       <input type="text" name="full_name" placeholder="Nome Completo" value='{{user.full_name}}'>
     </div>
 
     <div class="field required">
-      <label>C.P.F.</label>
+      <label>CPF ou CNPJ (Somente números. Incluir dígitos)</label>
       <input type="number" name="cpf" placeholder="" value='{{user.cpf}}'>
     </div>
 
@@ -83,6 +83,11 @@
     <div class="field required">
       <label>Estado</label>
       <input type="text" name="address.state" placeholder="Sigla do Estado" value='{{user.address.state}}'>
+    </div>
+
+    <div class="field required">
+      <label>CEP</label>
+      <input type="text" name="address.zip" placeholder="01234-000" value='{{user.address.zip}}'>
     </div>
 
     <div class="field required">
@@ -140,7 +145,7 @@
         identifier: 'full_name',
         rules: [{
           type: 'empty',
-          prompt: 'Insira seu nome completo'
+          prompt: 'Insira seu nome completo ou razão social'
         }]
       },
       password: {
@@ -164,7 +169,7 @@
         identifier: 'cpf',
         rules: [{
           type: 'empty',
-          prompt: 'CPF é obrigatório.'
+          prompt: 'Campo é obrigatório. (Insira somente números. Incluir os dígitos)'
         }]
       },
       phone: {
