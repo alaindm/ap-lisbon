@@ -28,6 +28,9 @@ router.use( function( req, res, next ) {
     next(); 
 });
 
+router.get('/gotoemail', (req, res)=>{
+  res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
+})
 
 // create action
 router.post('/', (req, res, next) => {
@@ -128,6 +131,58 @@ router.get('/logout', authenticate, function(req, res, next){
     })  
 })
 
+router.get('/contracts', authenticate, (req, res)=>{
+  User
+    .findOne({_id: req.user._id})
+    .then(user => {
+      moment.locale('pt-BR')
+      user.date = moment().format('LL')
+      var pdfString = user.cpf + (SHA256(JSON.stringify(user._id) + process.env.PARTNERSHIP_CONTRACT_SECRET).toString()).slice(5,11)
+      fs.readFile('views/users/partnershipContract.hbs', 'utf-8', function(error, source){        
+        var template = handlebars.compile(source);
+        var html = template(user);
+        var options = { 
+          format: 'A4',
+          "border": {
+            "top": "0.5in", // default is 0, units: mm, cm, in, px 
+            "right": "0.5in",
+            "bottom": "0.5in",
+            "left": "0.3in"
+          },
+          // "header": {
+              // "height": "5mm",
+              // "contents": '<div style="text-align: center;">CONTRATO DE PARCERIA</div>'
+          // }
+        };        
+        pdf.create(html, options).toFile(`./views/partnershipContracts/${pdfString}.pdf`, function(err, resp) {          
+          if (err) return console.log(err);
+          setTimeout(function(){
+
+            fs.unlink(`views/partnershipContracts/${pdfString}.pdf`, (err) => {
+            if (err) throw err;
+            console.log(`successfully deleted ${resp.filename}`);
+            })
+            },1*60*1000)
+          return
+        })
+      })
+      return pdfString
+    })
+    .catch(error => {
+      console.log(error)
+      req.flash('error', 'Falha no processamento do contrato')
+      res.redirect(303, '/broker')
+    })
+    .then((ramdomString) => {      
+      console.log(ramdomString)
+      res.render('users/contracts', {id: ramdomString, title: 'Meu Contrato de Parceria', robots: 'NOINDEX, NOFOLLOW'})
+    })
+    .catch(error => {
+      console.log(error)
+      req.flash('error', 'Ocorreu um erro')
+      res.redirect(303, '/broker')
+    })
+})
 // activate account
 router.get('/activation', (req, res, next) =>{
   var emailToken = req.query.token
@@ -389,63 +444,7 @@ router.post('/:id', authenticate, function(req, res, next) {
   }
 });
 
-router.get('/gotoemail', (req, res)=>{
-  res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
-})
 
-router.get('/contracts', authenticate, (req, res)=>{
-  User
-    .findOne({_id: req.user._id})
-    .then(user => {
-      moment.locale('pt-BR')
-      user.date = moment().format('LL')
-      var pdfString = user.cpf + (SHA256(JSON.stringify(user._id) + process.env.PARTNERSHIP_CONTRACT_SECRET).toString()).slice(5,11)
-      fs.readFile('views/users/partnershipContract.hbs', 'utf-8', function(error, source){        
-        var template = handlebars.compile(source);
-        var html = template(user);
-        var options = { 
-          format: 'A4',
-          "border": {
-            "top": "0.5in", // default is 0, units: mm, cm, in, px 
-            "right": "0.5in",
-            "bottom": "0.5in",
-            "left": "0.3in"
-          },
-          // "header": {
-              // "height": "5mm",
-              // "contents": '<div style="text-align: center;">CONTRATO DE PARCERIA</div>'
-          // }
-        };        
-        pdf.create(html, options).toFile(`./views/partnershipContracts/${pdfString}.pdf`, function(err, resp) {          
-          if (err) return console.log(err);
-          setTimeout(function(){
-
-            fs.unlink(`views/partnershipContracts/${pdfString}.pdf`, (err) => {
-            if (err) throw err;
-            console.log(`successfully deleted ${resp.filename}`);
-            })
-            },1*60*1000)
-          return
-        })
-      })
-      return pdfString
-    })
-    .catch(error => {
-      console.log(error)
-      req.flash('error', 'Falha no processamento do contrato')
-      res.redirect(303, '/broker')
-    })
-    .then((ramdomString) => {      
-      console.log(ramdomString)
-      res.render('users/contracts', {id: ramdomString, title: 'Meu Contrato de Parceria', robots: 'NOINDEX, NOFOLLOW'})
-    })
-    .catch(error => {
-      console.log(error)
-      req.flash('error', 'Ocorreu um erro')
-      res.redirect(303, '/broker')
-    })
-})
-  
 
 
 module.exports = router;
