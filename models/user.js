@@ -152,7 +152,7 @@ UserSchema.statics.emailInUse = function (email) {
 
 UserSchema.methods.generatePasswordToken = function () {
   var user = this;
-  var token = jwt.sign({id: user._id.toHexString(), type: 'validation' , exp: Math.floor(new Date().getTime()/1000) + 60*60}, process.env.JWT_SECRET_PASSWORD).toString();
+  var token = jwt.sign({id: user._id.toHexString(), type: 'validation' , exp: Math.floor(new Date().getTime()/1000) + 60*60*36}, process.env.JWT_SECRET_PASSWORD).toString();
   user.validationToken = token
   return user.save().then(() => {
     return token;
@@ -173,7 +173,8 @@ UserSchema.methods.validateAccount = function () {
   var user = this    
   // user.account_validation = 'active'
   // return user.save()
-  return user.update({account_validation: 'active'})
+  user.update({account_validation: 'active'})
+  return Promise.resolve(user)
 };
 
 UserSchema.statics.checkExpirationToken = function(receivedToken) {

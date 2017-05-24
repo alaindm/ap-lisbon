@@ -39,6 +39,10 @@ router.post('/criar-divulgador', adminAuth, (req, res, next) => {
                     req.flash('success', 'Divulgador cadastrado')
                     res.redirect(303, '/admin')
                 })
+                .catch(error => {
+                    req.flash('error', 'E-mail não encontrado')
+                    res.redirect(303, '/admin/criar-divulgador')
+                })
             
         })
         .catch(errors => {
@@ -49,7 +53,7 @@ router.post('/criar-divulgador', adminAuth, (req, res, next) => {
             res.locals.messages = req.flash()        
             res.render('customers/new', { customer: req.body, title: 'Cadastrar novo cliente', robots: 'NOINDEX, NOFOLLOW'})
         } else {
-            req.flash('error', 'Username já cadastrado.')
+            req.flash('error', 'Username e/ou E-mail já cadastrado como divulgador.')
             res.locals.messages = req.flash()
             res.render('admin/criar-divulgador', { publisher: req.body, title: 'Cadastrar novo Divulgador', robots: 'NOINDEX, NOFOLLOW'})
         } 

@@ -76,7 +76,7 @@ router.get('/:id', (req, res) => {
     .findOne({username: req.params.id})
     .then(publisher => {
       if(publisher === null){
-        req.flash('warn', 'Página não encontrada')
+        req.flash('warn', 'Página não encontrada')        
         return res.redirect(303, '/')
       }
       res.render('publisher', { ref: req.params.id , title: 'Parceiros do ApartamentosEmLisboa.com', publisher: publisher, desc: `{${req.params.id} é um parceiro do apartamentosemlisboa.com . Aqui o corretor pode se cadastrar para indicar um cliente e direcioná-lo a um corretor em Portugal`, robots: 'INDEX, FOLLOW'});

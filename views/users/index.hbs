@@ -1,204 +1,200 @@
 <script>
-    $(document)
-        .ready(function () {
-            $('.ui.accordion')
-                .accordion();
-            $('.ui.secondary.pointing.menu .item').tab();
-        });
+  $(document)
+    .ready(function () {
+      $('.ui.accordion')
+        .accordion();
+      $('.ui.secondary.pointing.menu .item').tab();
+    });
 </script>
 
 <div class="ui main container">
-    <div class="ui container">
-        <h1 class="ui form header" style='text-align: center'>Lista de Parceiros Cadastrados pela Referência no Site</h1>
-        </br>
+  <div class="ui container">
+    <h1 class="ui form header" style='text-align: center'>Lista de Parceiros Cadastrados pela Referência no Site</h1>
+    </br>
 
-        <div class="ui styled accordion fluid" style='max-width: 600px; margin: auto'>
-          {{#each user}}
-            <div class="title"><i class="dropdown icon"></i>{{full_name}}</div>
+    <div class="ui styled accordion fluid" style='max-width: 600px; margin: auto'>
+      {{#each user}}
+      <div class="title"><i class="dropdown icon"></i>{{full_name}}</div>
+      <div class="content">
+        <div class="ui list">
+
+          <a class="item">
+            <i class="right triangle icon"></i>
             <div class="content">
-                
-            
-
-
-  <div class="ui list">
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">C.P.F.</div>
-        <div class="description">{{cpf}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Status da Conta</div>
-        <div class="description">{{account_validation}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Telefone</div>
-        <div class="description">{{phone_number}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Apelido</div>
-        <div class="description">{{nickname}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">E-mail</div>
-        <div class="description">{{email}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Facebook</div>
-        <div class="description">{{facebook_url}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Área de Trabalho</div>
-        <div class="description">{{work_field}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">CRECI</div>
-        <div class="description">{{creci}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">CREA</div>
-        <div class="description">{{crea}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Endereço completo</div>
-        <div class="description">{{address.street}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Cidade</div>
-        <div class="description">{{address.city}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Estado</div>
-        <div class="description">{{address.state}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">País</div>
-        <div class="description">{{address.country}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Banco</div>
-        <div class="description">{{bank_account.bank}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Agencia</div>
-        <div class="description">{{bank_account.branch}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Conta</div>
-        <div class="description">{{bank_account.account_number}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Área de trabalho / Profissão</div>
-        <div class="description">{{work_field}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">IBAN</div>
-        <div class="description">{{iban}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Fonte</div>
-        <div class="description">{{source}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">Deletado? (Se constar e-mail, é porque a conta foi deletada pelo usuário)</div>
-        <div class="description">{{email_deleted}}</div>
-      </div>
-    </a>
-
-    <a class="item">
-      <i class="right triangle icon"></i>
-      <div class="content">
-        <div class="header">É administrador deste site?</div>
-        <div class="description">{{isAdmin}}</div>
-      </div>
-    </a>
-
-
-
+              <div class="header">C.P.F.</div>
+              <div class="description">{{cpf}}</div>
             </div>
-          {{/each}}
-            
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Status da Conta</div>
+              <div class="description">{{account_validation}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Telefone</div>
+              <div class="description">{{phone_number}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Apelido</div>
+              <div class="description">{{nickname}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">E-mail</div>
+              <div class="description">{{email}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Facebook</div>
+              <div class="description">{{facebook_url}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Área de Trabalho</div>
+              <div class="description">{{work_field}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">CRECI</div>
+              <div class="description">{{creci}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">CREA</div>
+              <div class="description">{{crea}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Endereço completo</div>
+              <div class="description">{{address.street}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Cidade</div>
+              <div class="description">{{address.city}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Estado</div>
+              <div class="description">{{address.state}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">País</div>
+              <div class="description">{{address.country}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Banco</div>
+              <div class="description">{{bank_account.bank}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Agencia</div>
+              <div class="description">{{bank_account.branch}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Conta</div>
+              <div class="description">{{bank_account.account_number}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Área de trabalho / Profissão</div>
+              <div class="description">{{work_field}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">IBAN</div>
+              <div class="description">{{iban}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Fonte</div>
+              <div class="description">{{source}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">Deletado? (Se constar e-mail, é porque a conta foi deletada pelo usuário)</div>
+              <div class="description">{{email_deleted}}</div>
+            </div>
+          </a>
+
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">É administrador deste site?</div>
+              <div class="description">{{isAdmin}}</div>
+            </div>
+          </a>
+
+
+
         </div>
+        
 
-        <br>     
+      </div>
 
+      
+{{/each}}
     </div>
 
-</div>
+  </div>

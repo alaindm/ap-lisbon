@@ -31,12 +31,11 @@ router.use( function( req, res, next ) {
 
 router.get('/index', authenticate, function(req, res, next) {
   Publisher
-    .find({email: req.user.email}, 'username')
-    .then(publishers => {
+    .findOne({email: req.user.email})
+    .then(publisher => {  
       User
-        .find({source: publishers.username})
-        .sort('_id')
-        .then(user => {
+        .find({source: publisher.username})        
+        .then(user => {          
           res.render('users/index', {title: 'Parceiros cadastrados', user});
         })
         .catch(error => {
@@ -242,10 +241,49 @@ router.get('/contracts', authenticate, (req, res)=>{
     })
 })
 // activate account
+// router.get('/activation', (req, res, next) =>{
+//   var emailToken = req.query.token
+//   User
+//     .checkExpirationToken(emailToken)
+//     .then(userId => {
+//       if(userId){
+//         User
+//           .findOne({_id: userId, validationToken: emailToken})          
+//           .then(user => { 
+//               user
+//                 .validateAccount()
+//                 .then(user => user.generateAuthToken())                
+//                 .then(token => {
+//                   req.session.token = token
+//                   req.session.li = true // li -> logged in                  
+//                   // req.flash('success', 'Account Activated!')
+//                   res.redirect(303,'/u/activated')
+//                 })              
+//             })
+//           .catch(e => {
+//             console.log(e)
+//             req.flash('error', 'Link de ativação inválido.')
+//             res.redirect(303, '/')
+//           })       
+//       } else {
+//         req.flash('error', 'Link expirado. Por favor, contate o administrador do sistema.')
+//         res.redirect(303,'/')
+//       }    
+//     })
+//     .catch( e => {
+//       req.flash('error','Link inválido ou expirado.')
+//       res.redirect(303,'/')
+//     })
+// })
+
 router.get('/activation', (req, res, next) =>{
   var emailToken = req.query.token
   User
     .checkExpirationToken(emailToken)
+    .catch( e => {
+      req.flash('error','Link inválido.')
+      res.redirect(303,'/')
+    })
     .then(userId => {
       if(userId){
         User
@@ -267,14 +305,10 @@ router.get('/activation', (req, res, next) =>{
             res.redirect(303, '/')
           })       
       } else {
-        req.flash('error', 'Link expiridado. Por favor, contate o administrador do sistema.')
+        req.flash('error', 'Link expirado. Por favor, contate o administrador do sistema.')
         res.redirect(303,'/')
       }    
-    })
-    .catch( e => {
-      req.flash('error','Link inválido ou expirado.')
-      res.redirect(303,'/')
-    })
+    })    
 })
 
 router.get('/activated', authenticate, (req, res) => {
