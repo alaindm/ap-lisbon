@@ -109,14 +109,17 @@
         </div>
       </div>
     </div>
-
-    <a href='/customers/new' class='item ui black tiny header'>Cadastrar Novo Cliente<a>
+    {{#unless isPub}}
+    <a href='/customers/new' class='item ui black tiny header'>Cadastrar Novo Cliente</a>
+    {{/unless}}
     <div  id="broker-menu-button" class="ui gray buttons">
     <a href='/broker'><div class="ui fluid button" ><i class="user icon"></i>Menu do Parceiro</div></a>
     <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
     <div class="menu">
       <a href='/broker' class='item'>Painel de Controle</a>
+      {{#unless isPub}}
       <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
+      {{/unless}}
       <a href='/u/logout' class='item'>Sair</a>
     </div>
   </div>
@@ -180,7 +183,9 @@
           </div>
         </div>
       </div>
+      {{#unless isPub}}
       <a href='/customers/new' class='item ui black tiny header mobile hidden'>Cadastrar Novo Cliente</a>
+      {{/unless}}
       <div class="right item">
         <script>
           $(document)
@@ -198,7 +203,9 @@
       <div class="ui floating dropdown icon button"><i class="dropdown icon"></i>
         <div class="menu">
           <a href='/broker' class='item'>Painel de Controle</a>
+          {{#unless isPub}}
           <a href='/customers/new' class='item'>Cadastrar Novo Cliente</a>
+          {{/unless }}
           <a href='/u/logout' class='item'>Sair</a>
         </div>
       </div>

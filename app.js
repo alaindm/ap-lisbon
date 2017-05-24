@@ -51,6 +51,7 @@ app.use(express.static(path.join(__dirname, 'views/partnershipContracts')));
 app.use(function(req, res, next) {
   res.locals.messages = req.flash()
   res.locals.isLoggedIn = req.session.li
+  res.locals.isPub = req.session.pub
   next();
 });
 

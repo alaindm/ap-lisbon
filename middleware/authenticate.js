@@ -17,6 +17,7 @@ var authenticate = (req, res, next) => {
       }
       if(decoded.id === user._id.toString()){        
         req.user = user
+        req.session.pub = req.user.isPublisher
         req.session.li = true // li -> logged in                
         next();
       } else {
