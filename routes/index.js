@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const _ = require('lodash');
 var {authenticate} = require('../middleware/authenticate');
+const {Publisher} = require('../models/publishers');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -40,7 +41,7 @@ router.get('/about', authenticate, function(req, res, next) {
 
 // User(Broker) menu
 router.get('/broker', authenticate, function(req, res, next) {   
-  res.render('broker', {id: (req.user._id), css:['broker.css'], title: 'Menu do Parceiro', desc: 'Opções para o corretor parceiro', robots: 'NOINDEX, FOLLOW'});
+  res.render('broker', {id: (req.user._id), isPublisher: (req.user.isPublisher), css:['broker.css'], title: 'Menu do Parceiro', desc: 'Opções para o corretor parceiro', robots: 'NOINDEX, FOLLOW'});
 });
 
 // FAQ 
@@ -67,6 +68,20 @@ router.get('/contract', authenticate, function(req, res, next) {
 router.get('/divulgador-exemplo', function(req, res, next) {
   req.session.ref = 'divulgador-exemplo'
   res.render('divulgador-exemplo', { ref: 'divulgador-exemplo', title: 'Página de Exemplo do Divulgador', desc: 'Divulgador-exemplo é um parceiro do apartamentosemlisboa.com . Aqui o corretor pode se cadastrar para indicar um cliente e direciona-lo a um corretor em Portugal', robots: 'INDEX, FOLLOW'});
+})
+
+router.get('/:id', (req, res) => {
+  req.session.ref = req.params.id
+  Publisher
+    .findOne({username: req.params.id})
+    .then(publisher => {
+      if(publisher === null){
+        req.flash('warn', 'Página não encontrada')
+        return res.redirect(303, '/')
+      }
+      res.render('publisher', { ref: req.params.id , title: 'Parceiros do ApartamentosEmLisboa.com', publisher: publisher, desc: `{${req.params.id} é um parceiro do apartamentosemlisboa.com . Aqui o corretor pode se cadastrar para indicar um cliente e direcioná-lo a um corretor em Portugal`, robots: 'INDEX, FOLLOW'});
+    })
+
 })
 
 module.exports = router

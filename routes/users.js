@@ -5,6 +5,7 @@ var emailSend = require('../mailer')
 var {authenticate} = require('../middleware/authenticate');
 var {adminAuth} = require('../middleware/adminAuth');
 var {User} = require('../models/user');
+var {Publisher} = require('../models/publishers');
 var {Customer} = require('../models/customers');
 const {ObjectID} = require('mongodb');
 const handlebars = require('handlebars')
@@ -28,6 +29,26 @@ router.use( function( req, res, next ) {
     next(); 
 });
 
+router.get('/index', authenticate, function(req, res, next) {
+  Publisher
+    .find({email: req.user.email}, 'username')
+    .then(publishers => {
+      User
+        .find({source: publishers.username})
+        .sort('_id')
+        .then(user => {
+          res.render('users/index', {title: 'Parceiros cadastrados', user});
+        })
+        .catch(error => {
+          req.flash('error', 'Erro interno')
+          res.redirect(303, '/brokers')
+        }) 
+    })
+    
+        
+});
+
+
 router.get('/gotoemail', (req, res)=>{
   res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
 })
@@ -38,35 +59,72 @@ router.post('/', (req, res, next) => {
   userParams.ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   User
     .emailInUse(userParams.email)
-    .catch(emailAlreadyRegistered => {
-      req.flash('error', 'E-mail já registrado.')
-      res.redirect(303, '/register')
-    })
-    .then(validEmail => {
+    .then(() => {
       var user = new User(userParams)            
-      user
-        .save()
-        .then(()=>{          
-          return user.generatePasswordToken()
-        })
-        .then(regToken => {          
-          emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: user.full_name})   
-          res.redirect(303, '/u/gotoemail')   
-        })
-        .catch(errors => {          
-          if(errors.name == 'ValidationError'){            
-            _.forIn(errors.errors, function(value, key) {
-              req.flash('error', value.message)              
-            });    
-            res.locals.messages = req.flash()        
-            res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source })                                
-          } else {
-            req.flash('error', 'Erro no formulário. Revise seus dados.')
-            res.locals.messages = req.flash()            
-            res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
-          }          
-        })
-    })       
+      user.save()     
+      .then(user =>{
+        // emailSend('fbexiga@remax.pt', "Parceiro Cadastrado | Apartamentos em Lisboa", 'userRegistration', {user})   
+        emailSend('fbexiga@remax.pt', "Parceiro Cadastrado | Apartamentos em Lisboa", 'userRegistration', {user})           
+        return user.generatePasswordToken()
+      })
+      .then(regToken => {          
+        emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: user.full_name})   
+        res.redirect(303, '/u/gotoemail')   
+      })
+    })    
+    .catch(errors => {    
+      console.log(errors)      
+      if(errors.name == 'ValidationError'){            
+        _.forIn(errors.errors, function(value, key) {
+          req.flash('error', value.message)              
+        });    
+        res.locals.messages = req.flash()        
+        res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source })               
+      }
+      if(errors === 'inUse'){        
+        req.flash('error', 'E-mail já registrado.')
+        res.locals.messages = req.flash() 
+        res.render('register', {title: 'Cadastro de Usuário', user: userParams, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
+      } else {
+        console.log(errors)
+        req.flash('error', 'Erro no formulário. Revise seus dados.')
+        res.locals.messages = req.flash()            
+        res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
+      }          
+    }) 
+
+    // .then(validEmail => {
+    //   var user = new User(userParams)            
+    //   user
+    //     .save()
+    //     .then(()=>{
+    //       emailSend('fbexiga@remax.pt', "Parceiro Cadastrado | Apartamentos em Lisboa", 'userRegistration', {user})             
+    //       return user.generatePasswordToken()
+    //     })
+    //     .then(regToken => {          
+    //       emailSend(userParams.email, "ApartamentosEmLisboa.com - Validação de conta", 'accountActivation', {token: regToken, firstName: user.full_name})   
+    //       res.redirect(303, '/u/gotoemail')   
+    //     })
+    //     .catch(errors => {          
+    //       if(errors.name == 'ValidationError'){            
+    //         _.forIn(errors.errors, function(value, key) {
+    //           req.flash('error', value.message)              
+    //         });    
+    //         res.locals.messages = req.flash()        
+    //         res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source })                                
+    //       } else {
+    //         console.log(errors)
+    //         req.flash('error', 'Erro no formulário. Revise seus dados.')
+    //         res.locals.messages = req.flash()            
+    //         res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
+    //       }          
+    //     })
+    // })
+    // .catch(emailAlreadyRegistered => {           
+    //   req.flash('error', 'E-mail já registrado.')
+    //   res.locals.messages = req.flash() 
+    //   res.render('register', {title: 'Cadastro de Usuário', user: req.body, robots: 'NOINDEX, NOFOLLOW', ref: req.body.source})
+    // })       
 });
 
 // Password recovery
@@ -236,7 +294,7 @@ router.post('/recovery', function(req, res){
       user
         .generatePasswordToken()
         .then(token => {
-          emailSend(req.body.email, "Apartamento Em Lisboa", 'passwordRecovery', {token: token, firstName: user.full_name})              
+          emailSend(req.body.email, "Apartamentos Em Lisboa", 'passwordRecovery', {token: token, firstName: user.full_name})              
           res.render('users/gotoemail', { title: 'Abra seu e-mail', desc: 'Usuário deve ir a sua caixa de e-mail', robots: 'NOINDEX, NOFOLLOW'})
         })
         .catch(e => {

@@ -1,7 +1,28 @@
+<h3> Lista de Divulgadores Cadastrados</h3>
+</br>
+<a href='admin/criar-divulgador' target='_blank'>
+<button class="ui black button">Cadastrar novo divulgador</button>
+</a>
+</br>
+<div class="ui middle aligned divided list">
+    {{#each publisher}}
+  <div class="item">
+    <div class="right floated content">
+      <a href='p/{{_id}}'><div class="ui tiny button">+ Detalhes</div></a>
+    </div>
+    <i class='icon user'></i>
+    <div class="content">
+      {{username}} | {{email}}
+    </div>
+  </div>  
+   {{/each}}
+</div>
+</br>
+
+
 <h3> Lista de Parceiros Cadastrados</h3>
 <h5>Inclui adminsitradores do website</h5>
 </br>
-
 <div class="ui middle aligned divided list">
     {{#each user}}
   <div class="item">

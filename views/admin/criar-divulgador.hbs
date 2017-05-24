@@ -1,0 +1,114 @@
+<style type="text/css">
+    .ui .form {
+      max-width: 600px;
+      margin: auto;
+    }
+</style>
+
+<div class=" ui main container">
+
+  <form class='ui form' action="/admin/criar-divulgador" method="post">
+
+    <h2 class="ui header">CADASTRO DE DIVULGADOR</h2>
+
+    <div class="ui raised compact segment">
+      <h5 class="ui red header">* <span class="ui black tiny header">Campos de preenchimento obrigatório</span></h5>
+    </div>
+
+    <div class="field required">
+      <label>Username (nome usado na URL)</label>
+      <input type="text" name="username" placeholder="" value='{{publisher.username}}'>
+    </div>
+
+    <div class="field required">
+      <label>E-mail</label>
+      <input type="text" name="email" placeholder="" value='{{publisher.email}}'>
+    </div>
+
+    {{!--<div class="field required">
+      <label>Senha</label>
+      <input type="text" name="password" placeholder="" value='{{publisher.password}}'>
+    </div>
+
+    <div class="field required">
+      <label>Nome Completo ou Razão Social</label>
+      <input type="text" name="full_name" placeholder="Nome Completo" value='{{publisher.full_name}}'>
+    </div>
+
+    <div class="field required">
+      <label>CPF, CNPJ ou NIF (Somente números. Incluir dígitos)</label>
+      <input type="number" name="id" placeholder="" value='{{publisher.id}}'>
+    </div>
+
+    <div class="field required">
+      <label>Telefone para contato (com DDD)</label>
+      <input type="number" name="phone_number" placeholder="(11) 91234-5678" value='{{publisher.phone_number}}'>
+    </div>
+
+    <div class="field required">
+      <label>Endereço/Morada (Rua, número e complemento)</label>
+      <input type="text" name="address.street" placeholder="Avenida Brasil, 100 Ap.1001" value='{{ lookup user 'address.street' }}'>
+    </div>
+
+    <div class="field required">
+      <label>Cidade</label>
+      <input type="text" name="address.city" placeholder="Cidade" value='{{publisher.address.city}}'>
+    </div>
+
+    <div class="field required">
+      <label>Estado</label>
+      <input type="text" name="address.state" placeholder="Sigla do Estado" value='{{publisher.address.state}}'>
+    </div>
+
+    <div class="field required">
+      <label>CEP ou Código Postal</label>
+      <input type="text" name="address.zip" placeholder="01234-000" value='{{publisher.address.zip}}'>
+    </div>
+
+    <div class="field required">
+      <label>País</label>
+      <input type="text" name="address.country" placeholder="Brasil" value='{{publisher.address.country}}'>
+    </div>--}}
+
+    {{!--<div class="ui error message">     </div>--}}
+    <button class="ui primary button" type="submit">Finalizar</button>
+
+  </form>
+
+</div>
+
+
+<script>
+  $(document)
+  .ready(function () {
+    $('form').form({
+      username: {
+        identifier: 'username',
+        rules: [{
+          type: 'empty',
+          prompt: 'Insira um username'
+        }]
+      },  
+      email: {
+        identifier: 'email',
+        rules: [{
+          type: 'empty',
+          prompt: 'Insira um e-mail válido'
+        }]
+      }
+    }
+    , {
+      inline: true,
+      onFailure: function () {
+        var $container = $("html,body");
+        var $scrollTo = $('.prompt');
+        $container.animate({scrollTop: $scrollTo.offset().top - $container.offset().top -200, scrollLeft: 0});
+        return false;
+      },
+      onSuccess: function () {
+        {{!--alert('success');--}}
+      }
+    }
+    );
+  }) 
+</script>

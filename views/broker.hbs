@@ -1,9 +1,20 @@
 <link href="/stylesheets/broker.css" rel="stylesheet">
 <div class='ui main' id='menu'>
   <h1 class='ui center aligned header'>Menu do Parceiro</h1>
+  {{#if isPublisher}}
   <div class='ui segment'>
     <h3 class="ui center aligned icon header">
-      <i class="circular users icon"></i> Clientes
+      <i class="circular users icon"></i> Divulgação
+    </h3>
+    <div class='ui basic segment'>    
+    <h4><a href='/u/index'>Parceiros cadastrados pela minha página</a></h4>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class='ui segment'>
+    <h3 class="ui center aligned icon header">
+      <i class="circular users icon"></i> Meus Clientes
     </h3>
     <div class='ui basic segment'>
     <h4><a href='/customers/new'>Cadastrar um novo cliente</a></h4>

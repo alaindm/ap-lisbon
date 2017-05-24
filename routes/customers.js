@@ -5,6 +5,7 @@ var {authenticate} = require('../middleware/authenticate');
 var {adminAuth} = require('../middleware/adminAuth');
 var {Customer} = require('../models/customers');
 const {ObjectID} = require('mongodb');
+const emailSend = require('../mailer')
 
 // index list
 router.get('/', authenticate, function(req, res, next) {
@@ -39,6 +40,7 @@ router.post('/', authenticate, function(req, res, next) {
     .then(customer => {
       req.flash('success', 'Cliente cadastrado com sucesso!')
       res.redirect(303, '/broker')
+      emailSend('fbexiga@remax.pt', "Cliente Cadastrado | Apartamentos em Lisboa", 'customerRegistration', {customer})   
     })
     .catch(errors => {
       console.log(errors)
@@ -49,10 +51,8 @@ router.post('/', authenticate, function(req, res, next) {
         res.locals.messages = req.flash()        
         res.render('customers/new', { customer: req.body, title: 'Cadastrar novo cliente', robots: 'NOINDEX, NOFOLLOW'})                                   
       } else {
-        req.flash('error', 'Erro no formulário. Revise seus dados.')
+        req.flash('error', 'Cliente já cadastrado.')
         res.locals.messages = req.flash()
-        console.log(errors)
-        console.log(req.body)
         res.render('customers/new', { customer: req.body, title: 'Cadastrar novo cliente', robots: 'NOINDEX, NOFOLLOW'})
       }      
     })

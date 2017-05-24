@@ -49,7 +49,7 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => validator.isLength(v, {min:11, max:15}),
+      validator: (v) => validator.isLength(v, {min:9, max:15}),
       message: 'Informação inválida.'
     }
   },
@@ -124,6 +124,9 @@ var UserSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean
+  },
+  isPublisher: {
+    type: Boolean
   }
 });
 
@@ -138,8 +141,13 @@ UserSchema.statics.emailInUse = function (email) {
   var User = this
   return User
           .findOne({email})
-          .then(user => Promise.reject('E-mail já cadastrado.'))
-          .catch(error => Promise.resolve(true))
+          .then((user) => {
+            if (user === null) {              
+              return Promise.resolve(true);
+            } else {
+              return Promise.reject('inUse')
+            }
+          })      
 }
 
 UserSchema.methods.generatePasswordToken = function () {

@@ -14,6 +14,7 @@
     "JWT_SECRET": "kk28dl29ja3j0fj3jf9aj3f1",
     "JWT_SECRET_PASSWORD": "i30dmcmg83cllf9ol202ndasw00xfjytrf",
     "SESSION_SECRET": "aADLSKJ9fkdfj093r391nfmva9JKJdo09",
+    "SENDGRID_API_KEY": "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",
     "PARTNERSHIP_CONTRACT_SECRET": "9as9dgn329898g89s6n67nfd673hlk2gkl4384825hjngklsgdfk2w"
   }
 }

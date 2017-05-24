@@ -36,7 +36,7 @@
     </div>
 
     <div class="field required">
-      <label>CPF ou CNPJ (Somente números. Incluir dígitos)</label>
+      <label>CPF, CNPJ ou NIF (Somente números. Incluir dígitos)</label>
       <input type="number" name="cpf" placeholder="" value='{{user.cpf}}'>
     </div>
 
@@ -60,7 +60,7 @@
       <input type="text" name="work_field" placeholder="Corretor, Engenheiro...." value='{{user.work_field}}'>
     </div>
 
-    <div class="field">
+    {{!--<div class="field">
       <label>CRECI</label>
       <input type="number" name="creci" placeholder="Número do seu CRECI" value='{{user.creci}}'>
     </div>
@@ -68,11 +68,11 @@
     <div class="field">
       <label>CREA</label>
       <input type="text" name="crea" placeholder="Número do seu CREA" value='{{user.crea}}'>
-    </div>
+    </div>--}}
 
     <div class="field required">
-      <label>Endereço completo (Rua, número e complemento)</label>
-      <input type="text" name="address.street" placeholder="Avenida Brasil, 100 Ap.1001" value='{{user.address.street}}'>
+      <label>Endereço/Morada (Rua, número e complemento)</label>
+      <input type="text" name="address.street" placeholder="Avenida Brasil, 100 Ap.1001" value='{{ lookup user 'address.street' }}'>
     </div>
 
     <div class="field required">
@@ -86,7 +86,7 @@
     </div>
 
     <div class="field required">
-      <label>CEP</label>
+      <label>CEP ou Código Postal</label>
       <input type="text" name="address.zip" placeholder="01234-000" value='{{user.address.zip}}'>
     </div>
 
@@ -95,7 +95,7 @@
       <input type="text" name="address.country" placeholder="Brasil" value='{{user.address.country}}'>
     </div>
 
-    <div class="field">
+    {{!--<div class="field">
       <label>Banco</label>
       <input type="text" name="bank_account.bank" placeholder="Nome ou número do Banco" value='{{user.bank_account.bank}}'>
     </div>
@@ -113,7 +113,7 @@
     <div class="field">
       <label>IBAN (Número internacional de Conta Bancária)</label>
       <input type="number" name="iban" placeholder="" value='{{user.iban}}'>
-    </div>
+    </div>--}}
 
     <div class="field required">
       <div class="ui checkbox">

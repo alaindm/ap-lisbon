@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
+// var {User} = require('../models/user');
+// const {Publisher} = require('../models/publishers');
 
-// index list
-// router.get('/', function(req, res, next) {
-//   res.render('publishers/index', {
-//     title: 'Admin List'
-//   });
-// });
+// publisher list
+
 
 // create form
 // router.get('/new', function(req, res, next) {
